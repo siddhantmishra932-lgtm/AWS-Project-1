@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section-wrapper" style="max-width:900px;">
+  <div class="section-header">
+    <h2>Frequently Asked Questions</h2>
+    <p>Got questions? Read through our comprehensive safety guides, gear plans, and registration FAQs.</p>
+  </div>
+  <div class="faq-grid">
+    {% for q, a in faqs %}
+    <div class="faq-item">
+      <div class="faq-question"><span>{{ q }}</span></div>
+      <div class="faq-answer"><p>{{ a }}</p></div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

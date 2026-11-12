@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf with context %}
+{% block title %}Book {{ trek.name }} - TAF{% endblock %}
+{% block content %}
+<div class="wizard-container" id="wizard"
+     data-trek-id="{{ trek.id }}" data-qty="{{ qty }}" data-base="{{ pricing.base }}" data-coupon-url="{{ url_for('api_coupon') }}">
+  <div class="wizard-steps-header">
+    <div class="wizard-step-node active" id="node-step-1">1</div>
+    <div class="wizard-step-node" id="node-step-2">2</div>
+    <div class="wizard-step-node" id="node-step-3">3</div>
+  </div>
+
+  <form id="booking-form" method="post" action="{{ url_for('booking', trek_id=trek.id) }}" novalidate>
+    {{ csrf() }}
+    <input type="hidden" name="date" value="{{ date.id }}">
+    <input type="hidden" name="qty" value="{{ qty }}">
+    <input type="hidden" name="coupon" id="coupon-hidden" value="">
+
+    <!-- STEP 1 -->
+    <div class="wizard-step-panel active" id="panel-step-1">
+      <h2 class="form-section-title">Trekkers Information Forms</h2>
+      <div style="background-color:hsl(var(--accent-earth-light), 0.2); padding:1rem; border-radius:8px; margin-bottom:1.5rem; font-size:0.85rem;">
+        <strong>Trek:</strong> {{ trek.name }} | <strong>Date:</strong> {{ date.start_date|long_date }} | <strong>Count:</strong> {{ qty }} Seat(s) reserved.
+      </div>
+
+      {% for i in range(1, qty + 1) %}
+      <div class="form-section-block" style="background-color:var(--off-white); border:1px solid rgba(0,0,0,0.06); padding:1.5rem; border-radius:8px; margin-bottom:1.5rem;">
+        <h4 style="margin-bottom:1.2rem; color:hsl(var(--primary-deep)); font-weight:700; border-bottom:1px solid rgba(0,0,0,0.05); padding-bottom:0.4rem;">Participant #{{ i }} Details</h4>
+        <div class="form-grid">
+          <div><label class="form-label">Full Name *</label><input type="text" name="name" class="form-input part-name" required placeholder="Passenger name"></div>
+          <div><label class="form-label">Gender *</label>
+            <select name="gender" class="form-input" required><option>Male</option><option>Female</option><option>Other</option></select></div>
+          <div><label class="form-label">Mobile Number *</label><input type="tel" name="contact" class="form-input" required pattern="[0-9+\- ]{10,15}" placeholder="10-digit number"></div>
+          <div><label class="form-label">WhatsApp Number *</label><input type="tel" name="whatsapp" class="form-input" required pattern="[0-9+\- ]{10,15}" placeholder="WhatsApp contact number"></div>
+          <div><label class="form-label">Email Address *</label><input type="email" name="email" class="form-input" required placeholder="Email id"></div>
+          <div><label class="form-label">Date of Birth *</label><input type="date" name="dob" class="form-input" required max="{{ today }}"></div>
+          <div><label class="form-label">Blood Group *</label>
+            <select name="blood_group" class="form-input" required>{% for b in ['O+','O-','A+','A-','B+','B-','AB+','AB-'] %}<option>{{ b }}</option>{% endfor %}</select></div>
+          <div><label class="form-label">Food Preference *</label>
+            <select name="food_pref" class="form-input" required><option value="Veg">Vegetarian</option><option value="Non-Veg">Non-Vegetarian</option></select></div>
+          <div><label class="form-label">T-Shirt Size *</label>
+            <select name="tshirt_size" class="form-input" required><option value="S">Small (S)</option><option value="M">Medium (M)</option><option value="L">Large (L)</option><option value="XL">Extra Large (XL)</option><option value="XXL">XXL</option></select></div>
+          <div><label class="form-label">Identity Proof Document Type *</label>
+            <select name="id_type" class="form-input" required><option value="Aadhar Card">Aadhar Card</option><option value="Driving License">Driving License</option><option value="Pan Card">PAN Card</option><option value="Passport">Passport</option></select></div>
+          <div class="form-group-full"><label class="form-label">Identity Card Reference Number *</label><input type="text" name="id_number" class="form-input" required placeholder="e.g. 12-digit Aadhar or Alpha-num code"></div>
+
+          <div class="form-group-full"><h5 style="margin: 0.8rem 0; color:hsl(var(--primary-green)); font-size:0.85rem; font-weight:700;">Emergency Contact Information</h5></div>
+          <div><label class="form-label">Emergency Guardian Name *</label><input type="text" name="emergency_name" class="form-input" required placeholder="Father/Mother/Spouse name"></div>
+          <div><label class="form-label">Relationship *</label><input type="text" name="emergency_rel" class="form-input" required placeholder="Relationship context"></div>
+          <div class="form-group-full"><label class="form-label">Emergency Contact Mobile *</label><input type="tel" name="emergency_num" class="form-input" required placeholder="Emergency mobile number"></div>
+
+          <div class="form-group-full"><h5 style="margin: 0.8rem 0; color:hsl(var(--primary-green)); font-size:0.85rem; font-weight:700;">Experience &amp; Fitness Summary</h5></div>
+          <div><label class="form-label">Prior Trekking Experience</label>
+            <select name="experience" class="form-input"><option value="Beginner">First Time Trekker / Beginner</option><option value="Moderate">Have completed 2-5 treks</option><option value="Experienced">Experienced trekker</option></select></div>
+          <div><label class="form-label">Fitness Level</label>
+            <select name="fitness" class="form-input"><option value="Average">Average (Active lifestyle)</option><option value="Good">Good (Regular jog/exercise)</option><option value="Excellent">Excellent (Athlete/Highly active)</option></select></div>
+          <div class="form-group-full"><label class="form-label">Physical Constraints or Illness details (if any)</label>
+            <textarea name="limitations" class="form-input" rows="2" placeholder="Asthma, bone-fracture history, heart disorders, etc. (Leave blank if none)"></textarea></div>
+
+          <div class="form-group-full"><h5 style="margin: 0.8rem 0; color:hsl(var(--primary-green)); font-size:0.85rem; font-weight:700;">Residential Address (State logistics)</h5></div>
+          <div class="form-group-full"><label class="form-label">Address *</label><input type="text" name="address" class="form-input" required placeholder="Flat, building, road name"></div>
+          <div><label class="form-label">City *</label><input type="text" name="city" class="form-input" required placeholder="Town/City name"></div>
+          <div><label class="form-label">State *</label><input type="text" name="state" class="form-input" required value="Maharashtra"></div>
+          <div class="form-group-full"><label class="form-label">Pincode *</label><input type="text" name="pincode" class="form-input" required pattern="[0-9]{6}" placeholder="6-digit pincode"></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="wizard-step-panel" id="panel-step-2">
+      <h2 class="form-section-title">Review Booking Summary</h2>
+      <div class="summary-box">
+        <h3 style="font-size:1.1rem; margin-bottom:1rem; border-bottom:1px solid rgba(0,0,0,0.06); padding-bottom:0.4rem;">Booking Details</h3>
+        <div class="summary-row"><span>Trek Destination:</span> <strong>{{ trek.name }}</strong></div>
+        <div class="summary-row"><span>District:</span> <strong>{{ trek.district }}</strong></div>
+        <div class="summary-row"><span>Date Slot:</span> <strong>{{ date.start_date|long_date }}</strong></div>
+        <div class="summary-row"><span>Number of Seats:</span> <strong>{{ qty }} Person(s)</strong></div>
+        <div class="summary-row"><span>Attendee Names:</span> <strong id="summary-attendees-names">-</strong></div>
+
+        <h3 style="font-size:1.1rem; margin:1.5rem 0 1rem 0; border-top:1px solid rgba(0,0,0,0.06); border-bottom:1px solid rgba(0,0,0,0.06); padding:0.8rem 0 0.4rem 0;">Cost Breakdown</h3>
+        <div class="summary-row"><span>Base Price ({{ qty }} &times; ₹{{ trek.price }}):</span> <span>₹{{ pricing.base }}</span></div>
+        <div class="summary-row" id="summary-coupon-discount-row" style="display:none; color:#2e7d32;"><span>Coupon Discount (10%):</span> <span id="summary-coupon-discount-val">-₹0</span></div>
+        <div class="summary-row"><span>Taxes &amp; Processing Fees (GST 5%):</span> <span id="summary-tax-amount">₹{{ pricing.tax }}</span></div>
+        <div class="summary-row summary-total"><span>Grand Total:</span> <span id="summary-grand-total">₹{{ pricing.total }}</span></div>
+      </div>
+
+      <div class="coupon-code-wrapper">
+        <input type="text" id="coupon-code-input" class="form-input" style="max-width:250px;" placeholder="Enter Coupon Code (e.g. TAF10)">
+        <button type="button" id="apply-coupon-btn" class="btn btn-primary" style="padding:0.6rem 1.2rem; font-size:0.85rem; border-radius:8px;">Apply</button>
+      </div>
+      <span id="coupon-status-msg" style="font-size:0.75rem; font-weight:600; display:block; margin-bottom:1.5rem;"></span>
+
+      <div style="border: 1px solid rgba(0,0,0,0.08); padding:1rem; border-radius:8px; background-color:#fff;">
+        <h4 style="font-size:0.9rem; margin-bottom:0.5rem; color:#c62828;">Disclaimer &amp; Rules Acceptance:</h4>
+        <p style="font-size:0.75rem; color:rgba(0,0,0,0.65); line-height:1.4;">
+          By ticking the check box below, I verify that all registered participants are physically fit and free from chronic lung/heart diseases. We pledge to follow the directions of the trek captains, not wander off trail, and strictly refrain from smoking and consuming alcohol during the trek.
+        </p>
+        <label class="rules-agreement-label">
+          <input type="checkbox" id="rules-checkbox-agree" name="agree" style="width:16px; height:16px;">
+          <span style="font-weight:700; color:hsl(var(--primary-deep));">I agree to all rules, safety guidelines, and the cancellation disclaimer. *</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="wizard-step-panel" id="panel-step-3">
+      <h2 class="form-section-title">Secure Payment Gateway</h2>
+      <p style="font-size:0.85rem; color:rgba(0,0,0,0.6); margin-bottom:1.5rem; text-align:center;">Secure payment processing for India via TAF Booking Checkout.</p>
+      <div class="payment-tabs">
+        <div class="pay-tab active" data-type="upi">UPI / GPay / PhonePe</div>
+        <div class="pay-tab" data-type="card">Credit / Debit Card</div>
+        <div class="pay-tab" data-type="net">Net Banking</div>
+      </div>
+
+      <div id="pay-content-upi" class="upi-qr-wrapper">
+        <p style="font-weight:700; font-size:0.95rem; margin-bottom:0.2rem;">Scan QR to Pay via BHIM / GPay / UPI</p>
+        <p style="font-size:0.75rem; color:rgba(0,0,0,0.5); margin-bottom:1.2rem;">Amount Due: <strong id="pay-upi-amt-label" style="color:hsl(var(--primary-green)); font-size:0.95rem;">₹{{ pricing.total }}</strong></p>
+        <div style="font-size:0.75rem; color:rgba(0,0,0,0.4); padding:0.5rem; background:#eae6df; border-radius:4px;">
+          Simulating UPI checkout. Click the "Complete Booking" button below to approve payment.
+        </div>
+      </div>
+      <!-- Card / net-banking inputs have no name= on purpose: this demo gateway never sends card data to the server. -->
+      <div id="pay-content-card" style="display:none; padding:1rem 0;">
+        <div style="display:flex; flex-direction:column; gap:1rem; max-width:400px; margin:0 auto;">
+          <div><label class="form-label">Name on Card</label><input type="text" class="form-input" placeholder="Full name" autocomplete="off"></div>
+          <div><label class="form-label">Card Number</label><input type="text" class="form-input" placeholder="16-digit card number" maxlength="16" autocomplete="off"></div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div><label class="form-label">Expiry Date</label><input type="text" class="form-input" placeholder="MM/YY" maxlength="5" autocomplete="off"></div>
+            <div><label class="form-label">CVV Code</label><input type="password" class="form-input" placeholder="3 digits" maxlength="3" autocomplete="off"></div>
+          </div>
+        </div>
+      </div>
+      <div id="pay-content-net" style="display:none; padding:1rem 0;">
+        <div style="max-width:400px; margin:0 auto;">
+          <label class="form-label">Choose Bank</label>
+          <select class="form-input"><option>State Bank of India (SBI)</option><option>HDFC Bank</option><option>ICICI Bank</option><option>Axis Bank</option><option>Kotak Mahindra Bank</option></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="wizard-buttons">
+      <button type="button" id="wizard-prev-btn" class="btn btn-outline" style="color:hsl(var(--primary-deep)); border-color:rgba(0,0,0,0.2); visibility:hidden;">Back</button>
+      <button type="button" id="wizard-next-btn" class="btn btn-secondary">Continue</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

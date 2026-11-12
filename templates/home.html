@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% from "_macros.html" import trek_card, status_badge with context %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Maharashtra Adventure Awaits</span>
+    <h1>Explore Maharashtra, One Trek at a Time.</h1>
+    <p>Experience the heritage of Chatrapati Shivaji Maharaj's forts, descend into water-carved valleys, sleep under clear night skies, and scale the tallest peaks in the Sahyadris with certified mountain leaders.</p>
+    <div class="hero-buttons">
+      <a href="{{ url_for('treks') }}" class="btn btn-secondary">Explore Treks</a>
+      <a href="#home-upcoming" class="btn btn-secondary">Upcoming Treks</a>
+      <a href="{{ url_for('faqs') }}" class="btn btn-secondary" style="border-color: rgba(255,255,255,0.4);">Safety Info</a>
+    </div>
+  </div>    
+</section>
+
+<section style="background-color: hsl(var(--primary-deep)); padding: 2rem 1.5rem; text-align: center;">
+  <form action="{{ url_for('treks') }}" method="get" style="max-width: 700px; margin: 0 auto; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+    <input type="text" name="search" placeholder="Search fort, trek name, district or location (e.g. Harishchandragad)..." style="flex: 1; padding: 0.8rem 1.2rem; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); background-color: rgba(255,255,255,0.08); color: white; min-width: 250px; font-size: 0.95rem;">
+    <button type="submit" class="btn btn-secondary" style="border-radius: 30px; padding: 0 2rem;">Search Treks</button>
+  </form>
+</section>
+
+<section class="section-wrapper">
+  <div class="section-header">
+    <h2>Popular Maharashtra Treks</h2>
+    <p>Handpicked weekend getaways with historical fort exploration and breath-taking views.</p>
+  </div>
+  <div class="trek-grid">
+    {% for t in featured %}{{ trek_card(t, upcoming.get(t.id, [])) }}{% endfor %}
+  </div>
+  <div style="text-align: center; margin-top: 3rem;">
+    <a href="{{ url_for('treks') }}" class="btn btn-dark">View All Treks</a>
+  </div>
+</section>
+
+<section id="home-upcoming" style="background-color: var(--pure-white); padding: 4.5rem 1.5rem;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-header">
+      <h2>Upcoming Trek Calendar</h2>
+      <p>Plan your next outdoor escape. Book your slot before the seats run out!</p>
+    </div>
+    <div class="upcoming-dates-wrapper">
+      {% for d, trek in calendar %}
+      <div class="upcoming-date-row">
+        <div class="upcoming-date-badge">{{ d|date_range }}</div>
+        <div class="upcoming-trek-details">
+          <a href="{{ url_for('trek_detail', trek_id=trek.id) }}" class="upcoming-trek-name">{{ trek.name }}</a>
+          <span class="upcoming-trek-meta">{{ trek.location }} | {{ trek.duration }}</span>
+        </div>
+        <div class="upcoming-price">₹{{ trek.price }}</div>
+        <div class="seat-indicator">
+          {{ status_badge(d.status, d.available_seats) }}
+          <span class="seat-count-text">{{ d.available_seats }} of {{ d.total_seats }} seats remaining</span>
+        </div>
+        <div>
+          <a href="{{ url_for('trek_detail', trek_id=trek.id) }}" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; width:100%; text-align:center;">Book Now</a>
+        </div>
+      </div>
+      {% else %}
+      <p style="text-align:center; padding: 2rem; color:rgba(0,0,0,0.5);">No upcoming trek sessions currently scheduled.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section-wrapper">
+  <div class="section-header">
+    <h2>Why Choose Treks, Adventure &amp; Fun?</h2>
+    <p>We combine adventure, safety, and local cultural immersion for a premium outdoor experience.</p>
+  </div>
+  <div class="why-us-grid">
+    <div class="why-us-card">
+      <div class="why-icon-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h3>Experienced Leaders</h3>
+      <p>Our trek captains are trained in mountaineering, basic search-and-rescue operations, and first-aid response.</p>
+    </div>
+    <div class="why-us-card">
+      <div class="why-icon-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg></div>
+      <h3>Safety First Approach</h3>
+      <p>From ropes and helmets to detailed weather audits and continuous safety monitoring, your security is our priority.</p>
+    </div>
+    <div class="why-us-card">
+      <div class="why-icon-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
+      <h3>Affordable Pricing</h3>
+      <p>Premium experience without premium costs. Our prices include transport, guides, gears, and village meals.</p>
+    </div>
+    <div class="why-us-card">
+      <div class="why-icon-box"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Verified Trek Routes</h3>
+      <p>We trace, inspect, and regularly audit all our routes, ensuring trails are safe, clear, and rich in natural beauty.</p>
+    </div>
+  </div>
+</section>
+
+<section style="background-color: var(--pure-white); padding: 4.5rem 1.5rem;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-header">
+      <h2>What Trekkers Say</h2>
+      <p>Read review responses from previous participants who explored Maharashtra fort trails with us.</p>
+    </div>
+    <div class="testimonials-grid">
+      {% for stars, text, initials, name in [
+        ('★★★★★', 'The Harishchandragad trek was absolutely outstanding! The sunset from Kokankada was majestic. The trek leaders were highly professional, supportive, and kept us hydrated and motivated throughout the steep climb.', 'AM', 'Aryan Madane'),
+        ('★★★★★', 'Devkund was like a dream. The forest trail is scenic and clean. Booking online was effortless, and the home-cooked lunch by the Bhira villagers was the best meal of the weekend. Highly recommend TAF!', 'SA', 'Sujal Aher'),
+        ('★★★★★', "Rappelling down Sandhan Valley was pure adrenaline. TAF's technical team was extremely patient, checking harnesses multiple times. Safe, challenging, and incredibly fun!", 'HM', 'Harsh Mane')] %}
+      <div class="testimonial-card">
+        <div class="testimonial-stars">{{ stars }}</div>
+        <p class="testimonial-text">"{{ text }}"</p>
+        <div class="testimonial-user">
+          <div class="user-avatar">{{ initials }}</div>
+          <div class="user-info"><h4>{{ name }}</h4><span>Mumbai</span></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section> 
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill, csrf with context %}
+{% block content %}
+{% set btn_green = 'padding:0.3rem 0.6rem; font-size:0.75rem; color:hsl(var(--primary-green)); border-color:hsl(var(--primary-green)); border-radius:4px;' %}
+{% set btn_red = 'padding:0.3rem 0.6rem; font-size:0.75rem; color:#d90429; border-color:#d90429; border-radius:4px;' %}
+<section class="section-wrapper" style="max-width:1300px;">
+  <div class="dashboard-layout" style="grid-template-columns: 240px 1fr;">
+    <aside class="dashboard-sidebar">
+      <div style="padding-bottom:1rem; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:1rem; text-align:center;">
+        <div class="user-avatar" style="width:60px; height:60px; font-size:1.5rem; margin:0 auto 0.5rem auto; background-color:hsl(var(--accent-earth));">A</div>
+        <strong>Trek Manager</strong>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block;">Console Control Active</span>
+      </div>
+      <a href="{{ url_for('admin', tab='stats') }}" class="dash-menu-item {{ 'active' if tab == 'stats' }}">Stats &amp; Overview</a>
+      <a href="{{ url_for('admin', tab='treks') }}" class="dash-menu-item {{ 'active' if tab == 'treks' }}">Manage Treks</a>
+      <a href="{{ url_for('admin', tab='dates') }}" class="dash-menu-item {{ 'active' if tab == 'dates' }}">Trek Scheduling</a>
+      <a href="{{ url_for('admin', tab='bookings') }}" class="dash-menu-item {{ 'active' if tab == 'bookings' }}">Registrations Log</a>
+      <form method="post" action="{{ url_for('logout') }}">
+        {{ csrf() }}
+        <button type="submit" class="dash-menu-item" style="background:none; border:none; width:100%; text-align:left; color:#c62828;">Logout</button>
+      </form>
+    </aside>
+
+    <div class="dashboard-content-panel" style="padding:1.5rem;">
+
+      {% if tab == 'stats' %}
+      <h3 style="font-size:1.25rem; margin-bottom:1.5rem; border-bottom:1px solid rgba(0,0,0,0.06); padding-bottom:0.5rem;">Analytics Overview</h3>
+      <div class="kpi-row">
+        <div class="kpi-card"><div class="kpi-info"><span class="kpi-val">₹{{ stats.total_revenue|inr }}</span><span class="kpi-label">Gross Revenue</span></div></div>
+        <div class="kpi-card"><div class="kpi-info"><span class="kpi-val">{{ stats.total_participants }}</span><span class="kpi-label">Total Trekkers</span></div></div>
+        <div class="kpi-card"><div class="kpi-info"><span class="kpi-val">{{ stats.total_bookings }}</span><span class="kpi-label">Active Bookings</span></div></div>
+        <div class="kpi-card"><div class="kpi-info"><span class="kpi-val">{{ stats.available_seats }}</span><span class="kpi-label">Available Slots</span></div></div>
+      </div>
+      <div style="background-color:var(--off-white); border-radius:8px; padding:1.5rem; margin-top:2rem;">
+        <h4 style="margin-bottom:0.8rem; font-size:1rem; color:hsl(var(--primary-deep));">Popular Maharashtra Destination:</h4>
+        <p style="font-size:1.15rem; font-weight:700; color:hsl(var(--primary-green));">{{ stats.popular_trek }}</p>
+        <p style="font-size:0.75rem; color:rgba(0,0,0,0.5); margin-top:0.3rem;">Based on total seat bookings registered across current active calendar cycles.</p>
+      </div>
+
+      {% elif tab == 'treks' %}
+      <div class="dash-actions-bar">
+        <h3 style="font-size:1.25rem;">Manage Adventure Treks</h3>
+        <a href="{{ url_for('admin', tab='treks', edit='new') }}" class="btn btn-secondary" style="padding:0.4rem 1rem; font-size:0.85rem;">Add New Trek</a>
+      </div>
+
+      {% if request.args.get('edit') %}
+      <div class="admin-collapsible-form" style="display:block;">
+        <h4 style="margin-bottom:1rem;">{{ 'Edit Trek: ' ~ edit.name if edit else 'Add Maharashtra Trek Profile' }}</h4>
+        <form method="post" action="{{ url_for('admin_trek_save') }}">
+          {{ csrf() }}
+          <input type="hidden" name="trek_id" value="{{ edit.id if edit else '' }}">
+          <div class="form-grid">
+            <div><label class="form-label">Trek Name *</label><input type="text" name="name" class="form-input" required value="{{ edit.name if edit }}" placeholder="e.g. Harishchandragad Peak"></div>
+            <div><label class="form-label">Region Location *</label><input type="text" name="location" class="form-input" required value="{{ edit.location if edit }}" placeholder="e.g. Malshej Ghat"></div>
+            <div><label class="form-label">District *</label><input type="text" name="district" class="form-input" required value="{{ edit.district if edit }}" placeholder="e.g. Ahmednagar"></div>
+            <div><label class="form-label">Difficulty *</label>
+              <select name="difficulty" class="form-input" required>
+                {% for d in ['Easy', 'Moderate', 'Difficult'] %}<option {{ 'selected' if edit and edit.difficulty == d }}>{{ d }}</option>{% endfor %}
+              </select></div>
+            <div><label class="form-label">Elevation (feet) *</label><input type="number" name="elevation" class="form-input" required min="0" value="{{ edit.elevation if edit }}" placeholder="e.g. 4670"></div>
+            <div><label class="form-label">Distance (km) *</label><input type="number" step="any" name="distance" class="form-input" required min="0" value="{{ edit.distance if edit }}" placeholder="e.g. 12"></div>
+            <div><label class="form-label">Duration *</label><input type="text" name="duration" class="form-input" required value="{{ edit.duration if edit }}" placeholder="e.g. 2 Days / 1 Night"></div>
+            <div><label class="form-label">Meeting / Reporting Spot *</label><input type="text" name="meeting_point" class="form-input" required value="{{ edit.meeting_point if edit }}" placeholder="e.g. Kalyan Station"></div>
+            <div><label class="form-label">Reporting Time *</label><input type="text" name="reporting_time" class="form-input" required value="{{ edit.reporting_time if edit }}" placeholder="e.g. 22:00"></div>
+            <div><label class="form-label">Expected Return Time *</label><input type="text" name="expected_return_time" class="form-input" required value="{{ edit.expected_return_time if edit }}" placeholder="e.g. 20:00 (Next Day)"></div>
+            <div><label class="form-label">Price Per Person (₹) *</label><input type="number" name="price" class="form-input" required min="0" value="{{ edit.price if edit }}" placeholder="e.g. 1499"></div>
+            <div><label class="form-label">Trek Image URL *</label><input type="url" name="image" class="form-input" required value="{{ edit.image if edit }}" placeholder="https://..."></div>
+            <div class="form-group-full"><label class="form-label">Description *</label><textarea name="description" class="form-input" rows="3" required>{{ edit.description if edit }}</textarea></div>
+            <div class="form-group-full"><label class="form-label">Inclusions (one per line)</label><textarea name="included" class="form-input" rows="3">{{ edit.included|join('\n') if edit }}</textarea></div>
+            <div class="form-group-full"><label class="form-label">Exclusions (one per line)</label><textarea name="excluded" class="form-input" rows="3">{{ edit.excluded|join('\n') if edit }}</textarea></div>
+            <div class="form-group-full"><label class="form-label">Things to Carry (one per line)</label><textarea name="things_to_carry" class="form-input" rows="3">{{ edit.things_to_carry|join('\n') if edit }}</textarea></div>
+          </div>
+          <div style="display:flex; gap:0.8rem; margin-top:1.5rem;">
+            <button type="submit" class="btn btn-secondary">Save Trek Profile</button>
+            <a href="{{ url_for('admin', tab='treks') }}" class="btn btn-outline" style="color:hsl(var(--charcoal-black)); border-color:rgba(0,0,0,0.15);">Cancel</a>
+          </div>
+        </form>
+      </div>
+      {% endif %}
+
+      <div class="dashboard-table-wrapper">
+        <table class="dashboard-table">
+          <thead><tr><th>Trek Name</th><th>Location</th><th>Difficulty</th><th>Price</th><th>Stats</th><th>Action</th></tr></thead>
+          <tbody>
+            {% for t in treks %}
+            <tr>
+              <td><strong>{{ t.name }}</strong></td><td>{{ t.location }}</td><td>{{ t.difficulty }}</td><td>₹{{ t.price }}</td>
+              <td>{{ t.elevation }} ft | {{ t.distance }} km</td>
+              <td>
+                <div style="display:flex; gap:0.4rem;">
+                  <a href="{{ url_for('admin', tab='treks', edit=t.id) }}" class="btn btn-outline" style="{{ btn_green }}">Edit</a>
+                  <form method="post" action="{{ url_for('admin_trek_delete', trek_id=t.id) }}" data-confirm="Are you sure you want to delete this trek? This will clean up scheduled dates as well.">
+                    {{ csrf() }}<button type="submit" class="btn btn-outline" style="{{ btn_red }}">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% elif tab == 'dates' %}
+      <div class="dash-actions-bar"><h3 style="font-size:1.25rem;">Trek Calendar Dates Scheduling</h3></div>
+      <div class="admin-collapsible-form" style="display:block;">
+        <h4 style="margin-bottom:1rem;">Schedule Trek Date Slot</h4>
+        <form method="post" action="{{ url_for('admin_date_add') }}">
+          {{ csrf() }}
+          <div class="form-grid">
+            <div><label class="form-label">Trek Destination *</label>
+              <select name="trek_id" class="form-input" required>{% for t in treks %}<option value="{{ t.id }}">{{ t.name }}</option>{% endfor %}</select></div>
+            <div><label class="form-label">Start Date *</label><input type="date" name="start" class="form-input" required min="{{ today }}"></div>
+            <div><label class="form-label">End Date *</label><input type="date" name="end" class="form-input" required min="{{ today }}"></div>
+            <div><label class="form-label">Total Seat Capacity *</label><input type="number" name="seats" class="form-input" required min="5" max="60" value="30"></div>
+          </div>
+          <div style="margin-top:1.5rem;"><button type="submit" class="btn btn-secondary">Schedule Date Slot</button></div>
+        </form>
+      </div>
+      <div class="dashboard-table-wrapper">
+        <table class="dashboard-table">
+          <thead><tr><th>Trek Name</th><th>Dates</th><th>Seats (Avail/Total)</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            {% for d in dates %}
+            <tr>
+              <td><strong>{{ trek_map[d.trek_id].name if d.trek_id in trek_map else 'Deleted Trek' }}</strong></td>
+              <td>{{ d.start_date if d.start_date == d.end_date else d.start_date ~ ' to ' ~ d.end_date }}</td>
+              <td>{{ d.available_seats }} / {{ d.total_seats }} seats</td>
+              <td>{{ status_pill(d.status, d.available_seats) }}</td>
+              <td>
+                <form method="post" action="{{ url_for('admin_date_delete', date_id=d.id) }}" data-confirm="Are you sure you want to delete this scheduled date?">
+                  {{ csrf() }}<button type="submit" class="btn btn-outline" style="{{ btn_red }}">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% elif tab == 'bookings' %}
+      <div class="dash-actions-bar">
+        <h3 style="font-size:1.25rem;">Participant Registrations Logs</h3>
+        <a href="{{ url_for('admin_export') }}" class="btn btn-primary" style="padding:0.4rem 1rem; font-size:0.85rem;">Export CSV Data</a>
+      </div>
+      <form method="get" action="{{ url_for('admin') }}" style="background-color:var(--off-white); border-radius:8px; padding:1rem; margin-bottom:1.5rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+        <input type="hidden" name="tab" value="bookings">
+        <input type="text" name="q" value="{{ q }}" class="form-input" style="flex:1; min-width:200px;" placeholder="Search booking ID or participant name...">
+        <select name="trek" class="form-input" style="max-width:250px;" data-autosubmit>
+          <option value="">All Treks</option>
+          {% for t in treks %}<option value="{{ t.id }}" {{ 'selected' if t.id == trek_filter }}>{{ t.name }}</option>{% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary" style="padding:0.4rem 1rem;">Search</button>
+      </form>
+      <div class="dashboard-table-wrapper">
+        {% if bookings %}
+        <table class="dashboard-table">
+          <thead><tr><th>Booking ID</th><th>Trek / Details</th><th>Primary Contact</th><th>Attendees Info</th><th>Amt Paid</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            {% for b, parts in bookings %}
+            {% set trek = trek_map.get(b.trek_id) %}{% set d = date_map.get(b.date_id) %}{% set primary = parts[0] if parts else none %}
+            <tr>
+              <td><strong>{{ b.id }}</strong></td>
+              <td><strong>{{ trek.name if trek else 'Deleted Trek' }}</strong><span style="display:block; font-size:0.75rem; color:rgba(0,0,0,0.5);">{{ d.start_date if d else 'Unknown' }}</span></td>
+              <td><strong>{{ primary.name if primary else 'Guest' }}</strong><span style="display:block; font-size:0.75rem; color:rgba(0,0,0,0.5);">{{ primary.email if primary else b.user_id }} | {{ primary.contact if primary else '-' }}</span></td>
+              <td><div style="font-size:0.8rem;">
+                {% for p in parts %}<div style="padding:0.1rem 0;">{{ loop.index }}. {{ p.name }} (Age {{ p.age }}, {{ p.gender }}) [Food: {{ p.food_pref }}] [ID: {{ p.id_type }} {{ p.id_number }}]</div>{% endfor %}
+              </div></td>
+              <td>₹{{ b.total_amount }}</td>
+              <td style="color:{{ '#2e7d32' if b.booking_status == 'Confirmed' else '#c62828' }}; font-weight:700;">{{ b.booking_status }}</td>
+              <td>
+                <div style="display:flex; gap:0.4rem;">
+                  <a href="{{ url_for('confirmation', booking_id=b.id) }}" class="btn btn-outline" style="{{ btn_green }}">View</a>
+                  {% if b.booking_status == 'Confirmed' %}
+                  <form method="post" action="{{ url_for('cancel', booking_id=b.id) }}" data-confirm="ADMIN FORCE CANCEL: Are you sure you want to cancel booking {{ b.id }}? Paid seats will be returned back to availability count.">
+                    {{ csrf() }}<input type="hidden" name="next" value="admin">
+                    <button type="submit" class="btn btn-outline" style="{{ btn_red }}">Cancel</button>
+                  </form>
+                  {% endif %}
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p style="text-align:center; padding:3rem; color:rgba(0,0,0,0.5);">No registration records match your filter.</p>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Treks, Adventure and Fun (TAF) - Maharashtra Trekking & Booking Portal{% endblock %}</title>
+  <meta name="description" content="Discover popular Maharashtra treks, historic fort ascents, camping dates, and canyon challenges. Register yourself or groups securely with real-time seat availability tracking.">
+  <meta name="keywords" content="Maharashtra trekking, Best treks in Maharashtra, Maharashtra trekking groups, Fort treks in Maharashtra, Weekend treks near Mumbai, Weekend treks near Pune, Trekking places in Maharashtra">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-csrf="{{ csrf_token }}">
+  {% set ep = request.endpoint %}
+  <header>
+    <div class="nav-container">
+
+      <a href="{{ url_for('home') }}" class="logo-wrapper">
+        <span class="logo-text">Treks,<span>Adventure</span>&amp;Fun</span>
+      </a>
+
+      <nav class="nav-links" id="nav-desktop-links">
+        <a href="{{ url_for('home') }}" class="nav-link-item {{ 'active' if ep == 'home' }}">Home</a>
+        <a href="{{ url_for('treks') }}" class="nav-link-item {{ 'active' if ep in ('treks', 'trek_detail', 'booking') }}">All Treks</a>
+        <a href="{{ url_for('about') }}" class="nav-link-item {{ 'active' if ep == 'about' }}">About Us</a>
+        <a href="{{ url_for('faqs') }}" class="nav-link-item {{ 'active' if ep == 'faqs' }}">FAQs</a>
+        <a href="{{ url_for('contact') }}" class="nav-link-item {{ 'active' if ep == 'contact' }}">Contact Us</a>
+        <a href="{{ url_for('dashboard') }}" class="nav-link-item {{ 'active' if ep == 'dashboard' }}">My Bookings</a>
+      </nav>
+
+      <div class="nav-right-section">
+
+        <!-- Search bar removed -->
+
+        <div id="nav-auth-status">
+          {% if session_user %}
+            <div style="display:flex; align-items:center; gap:0.8rem;">
+              <a href="{{ url_for('admin' if session_admin else 'dashboard') }}"
+                 class="auth-btn"
+                 style="background-color:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:white; font-size:0.8rem; padding:0.4rem 1rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span>{{ session_user.split('@')[0] }}</span>
+              </a>
+            </div>
+          {% else %}
+            <a href="{{ url_for('dashboard') }}" class="auth-btn">Trekker Login</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <button class="burger-menu" id="mobile-hamburger-btn" aria-label="Toggle menu navigation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" x2="20" y1="12" y2="12"/>
+          <line x1="4" x2="20" y1="6" y2="6"/>
+          <line x1="4" x2="20" y1="18" y2="18"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <div id="mobile-drawer-links"
+         style="display:none; background-color:rgba(27, 50, 34, 0.98); border-top:1px solid rgba(255,255,255,0.08); padding:1rem 1.5rem;"
+         class="no-print">
+
+      <nav style="display:flex; flex-direction:column; gap:1.2rem;">
+
+        <a href="{{ url_for('home') }}" class="mob-link-item" style="color:white; font-weight:600; display:block;">Home</a>
+
+        <a href="{{ url_for('treks') }}" class="mob-link-item" style="color:white; font-weight:600; display:block;">All Treks</a>
+
+        <a href="{{ url_for('about') }}" class="mob-link-item" style="color:white; font-weight:600; display:block;">About Us</a>
+
+        <a href="{{ url_for('faqs') }}" class="mob-link-item" style="color:white; font-weight:600; display:block;">FAQs Safety Guide</a>
+
+        <a href="{{ url_for('contact') }}" class="mob-link-item" style="color:white; font-weight:600; display:block;">Contact Us</a>
+
+        <a href="{{ url_for('dashboard') }}" class="mob-link-item" style="color:white; font-weight:600; display:block;">My Bookings</a>
+
+
+        <!-- Mobile search bar removed -->
+
+        <div style="margin-top:0.5rem; border-top:1px solid rgba(255,255,255,0.1); padding-top:1rem; display:flex; flex-direction:column; gap:1rem;">
+
+          {% if session_user %}
+            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+
+              <span style="color:rgba(255,255,255,0.6); font-size:0.75rem; word-break:break-all;">
+                Logged in: {{ session_user }}
+              </span>
+
+              <form action="{{ url_for('logout') }}" method="post">
+                <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+                <button type="submit" class="auth-btn logout-btn" style="justify-content:center; width:100%;">Logout</button>
+              </form>
+
+            </div>
+          {% else %}
+            <a href="{{ url_for('dashboard') }}" class="auth-btn" style="justify-content:center; width:100%;">Trekker Login</a>
+          {% endif %}
+
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div id="toast-container" class="no-print">
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="toast {{ 'toast-error' if category == 'error' }}">
+        <div style="display:flex; align-items:center; gap:0.6rem;">
+          <span style="font-size:0.85rem; font-weight:500;">{{ message }}</span>
+        </div>
+        <span class="toast-close" style="font-weight:700; margin-left:1rem;">&times;</span>
+      </div>
+    {% endfor %}
+  </div>
+
+  <main id="app-view">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="no-print">
+    <div class="footer-grid">
+
+      <div class="footer-column">
+        <div class="footer-logo">Treks,<span>Adventure</span>&amp;Fun</div>
+
+        <p style="margin-bottom:1.5rem; font-size:0.85rem; line-height:1.6; color:rgba(255,255,255,0.6);">
+          TAF is a premier adventure tourism platform in Maharashtra. We organize weekend fort treks, night camping, stargazing, and high-altitude climbs near Mumbai &amp; Pune.
+        </p>
+
+        <span style="font-weight:700; color:white; display:block; margin-bottom:0.5rem; font-size:0.85rem;">
+          Follow TAF Adventures:
+        </span>
+
+        <div class="social-links">
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram Page">IG</a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook Page">FB</a>
+          <a href="https://whatsapp.com" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp Channel">WA</a>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Popular Treks</h3>
+        <ul>
+          <li><a href="{{ url_for('trek_detail', trek_id='trek-harishchandragad') }}">Harishchandragad Fort</a></li>
+          <li><a href="{{ url_for('trek_detail', trek_id='trek-kalsubai') }}">Kalsubai Peak Summit</a></li>
+          <li><a href="{{ url_for('trek_detail', trek_id='trek-devkund') }}">Devkund Waterfall pool</a></li>
+          <li><a href="{{ url_for('trek_detail', trek_id='trek-rajmachi') }}">Rajmachi Twin Forts</a></li>
+          <li><a href="{{ url_for('trek_detail', trek_id='trek-sandhan') }}">Sandhan Valley Canyon</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Helpful Links</h3>
+        <ul>
+          <li><a href="{{ url_for('treks') }}">Explore All Treks</a></li>
+          <li><a href="{{ url_for('faqs') }}">Safety Instructions</a></li>
+          <li><a href="{{ url_for('faqs') }}">Refunds / Cancellation</a></li>
+          <li><a href="{{ url_for('contact') }}">Emergency Coordination</a></li>
+          <li><a href="{{ url_for('admin') }}">Admin Login Portal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Treks Crew Office</h3>
+
+        <p style="margin-bottom:0.6rem; font-size:0.85rem;">
+          Wagle Estate, Thane - 400604, Maharashtra
+        </p>
+
+        <p style="margin-bottom:0.6rem; font-size:0.85rem;">
+          <strong>Phone:</strong> +91 8104799308
+        </p>
+
+        <p style="margin-bottom:0.6rem; font-size:0.85rem;">
+          <strong>Email:</strong> yash2518mane@gmail.com
+        </p>
+
+        <div style="margin-top:1rem; border-left:3px solid #c62828; padding-left:0.5rem; font-size:0.8rem; background-color:rgba(255,255,255,0.05); padding:0.4rem;">
+          <strong style="color:#ef5350; display:block;">Emergency Line:</strong>
+          <span style="color:white; font-weight:700;">+91 7083019308</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{ current_year }} Treks, Adventure and Fun Booking Platform. Made in India. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+
+</body>
+</html>

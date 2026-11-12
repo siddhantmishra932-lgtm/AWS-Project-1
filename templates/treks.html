@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% from "_macros.html" import trek_card with context %}
+{% block content %}
+<section class="section-wrapper">
+  <div class="section-header" style="margin-bottom: 2.5rem;">
+    <h2>Explore Maharashtra Adventures</h2>
+    <p>Choose from our selection of wilderness routes, historical hill fort climbs, and technical canyon descents.</p>
+  </div>
+
+  <form method="get" action="{{ url_for('treks') }}" id="filter-form" class="listing-layout">
+    <aside class="filter-panel">
+      <div class="filter-title">
+        <span>Filter Options</span>
+        <a href="{{ url_for('treks') }}" style="font-size:0.75rem; color:hsl(var(--primary-green)); font-weight:600;">Clear All</a>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Search Keyword</label>
+        <input type="text" name="search" class="filter-input" value="{{ q }}" placeholder="Fort name, district...">
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Difficulty Level</label>
+        <select name="diff" class="filter-select" data-autosubmit>
+          <option value="">All Difficulties</option>
+          {% for d in ['Easy', 'Moderate', 'Difficult'] %}
+            <option value="{{ d }}" {{ 'selected' if diff.lower() == d.lower() }}>{{ d }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="filter-group">
+        <div class="range-wrap">
+          <div class="range-label-wrap">
+            <span class="filter-label">Max Price</span>
+            <span id="price-val-indicator" style="color:hsl(var(--primary-green)); font-weight:700;">₹{{ price }}</span>
+          </div>
+          <input type="range" name="price" id="filter-price" class="filter-range" min="800" max="3000" step="100" value="{{ price }}" data-autosubmit>
+          <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:rgba(0,0,0,0.5);"><span>₹800</span><span>₹3,000</span></div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:0.5rem;">Apply Filters</button>
+    </aside>
+
+    <div>
+      <div class="sorting-wrapper">
+        <div class="results-count">{{ treks|length }} treks match your criteria</div>
+        <div class="sort-dropdown-wrap">
+          <span style="font-size:0.85rem; color:rgba(0,0,0,0.6); font-weight:500;">Sort By:</span>
+          <select name="sort" class="sort-select" data-autosubmit>
+            {% for val, label in [('date', 'Upcoming Date'), ('price-asc', 'Price: Low to High'), ('price-desc', 'Price: High to Low'), ('popularity', 'Popular (Elevation)')] %}
+              <option value="{{ val }}" {{ 'selected' if sort == val }}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="trek-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+        {% for t in treks %}
+          {{ trek_card(t, upcoming.get(t.id, [])) }}
+        {% else %}
+          <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; background-color: white; border-radius: 12px; box-shadow: var(--card-shadow);">
+            <h3>No Treks Found</h3>
+            <p style="color:rgba(0,0,0,0.6); margin-top:0.5rem;">Try adjusting your filters, searching for a different keyword, or resetting parameters.</p>
+            <a href="{{ url_for('treks') }}" class="btn btn-primary" style="margin-top:1.5rem;">Reset Filters</a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </form>
+</section>
+{% endblock %}

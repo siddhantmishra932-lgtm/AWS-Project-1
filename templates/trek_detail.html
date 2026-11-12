@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% from "_macros.html" import status_pill with context %}
+{% block title %}{{ trek.name }} - TAF{% endblock %}
+{% block content %}
+{% set bg = '#d90429' if trek.difficulty|lower == 'difficult' else ('#e65f05' if trek.difficulty|lower == 'moderate' else '#2b9348') %}
+<div class="trek-detail-header-bg" style="position: relative; overflow: hidden;">
+  <img src="{{ trek.image }}" referrerpolicy="no-referrer" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" alt="{{ trek.name }}">
+  <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.75)); z-index:2;"></div>
+  <div class="trek-header-content" style="z-index:3;">
+    <div class="trek-header-inner">
+      <span class="difficulty-badge" style="position:static; display:inline-block; margin-bottom:1rem; font-weight:700; text-transform:uppercase; font-size:0.8rem; background-color:{{ bg }};">{{ trek.difficulty }}</span>
+      <h1>{{ trek.name }}</h1>
+      <div class="trek-header-meta">
+        <div class="trek-header-meta-item"><span>{{ trek.location }}</span></div>
+        <div class="trek-header-meta-item"><span>Duration: {{ trek.duration }}</span>div>
+        <div class="trek-header-meta-item"><span>Next Date: {{ active_date.start_date|short_date if active_date else 'None' }}</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-wrapper">
+  <div class="trek-detail-grid">
+    <div class="trek-content-panel">
+      <div class="trek-detail-card">
+        <h2 class="trek-card-title">Trek Highlights</h2>
+        <div class="trek-specs-box">
+          <div class="trek-spec-block"><div class="trek-spec-label">Peak Elevation</div><div class="trek-spec-val">{{ trek.elevation }} ft</div></div>
+          <div class="trek-spec-block"><div class="trek-spec-label">Distance Walked</div><div class="trek-spec-val">{{ trek.distance|int if trek.distance == trek.distance|int else trek.distance }} km</div></div>
+          <div class="trek-spec-block"><div class="trek-spec-label">District Region</div><div class="trek-spec-val">{{ trek.district }}</div></div>
+        </div>
+        <p style="font-size:0.95rem; color:rgba(0,0,0,0.85);">{{ trek.description }}</p>
+      </div>
+
+      <div class="trek-detail-card">
+        <h2 class="trek-card-title">Day-by-Day Itinerary</h2>
+        <div class="itinerary-accordion">
+          {% for day in trek.itinerary %}
+          <div class="itinerary-step">
+            <div class="itinerary-header" data-index="{{ loop.index0 }}">
+              <div><span>Day {{ day.day }}:</span> {{ day.title }}</div>
+              <svg style="width:16px; height:16px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </div>
+            <div class="itinerary-content {{ 'active' if loop.first }}" id="itinerary-content-{{ loop.index0 }}">
+              <ul style="display:flex; flex-direction:column; gap:0.5rem;">
+                {% for item in day['items'] %}<li class="itinerary-list-item">{{ item }}</li>{% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="trek-detail-card">
+        <h2 class="trek-card-title">Inclusions &amp; Exclusions</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:1rem;" class="form-grid">
+          <div>
+            <h3 style="font-size:1.05rem; margin-bottom:1rem; color:#2e7d32;">Included in Price</h3>
+            <div style="display:flex; flex-direction:column; gap:0.8rem;">
+              {% for item in trek.included %}
+              <div class="checklist-item">
+                <svg class="icon-include" style="width:16px; height:16px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                <span>{{ item }}</span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size:1.05rem; margin-bottom:1rem; color:#c62828;">Not Included (Excluded)</h3>
+            <div style="display:flex; flex-direction:column; gap:0.8rem;">
+              {% for item in trek.excluded %}
+              <div class="checklist-item">
+                <svg class="icon-exclude" style="width:16px; height:16px;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                <span>{{ item }}</span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trek-detail-card">
+        <h2 class="trek-card-title">Things To Carry Checklist</h2>
+        <p style="font-size:0.85rem; color:rgba(0,0,0,0.6); margin-bottom:1rem;">Check off items as you pack your gear bag!</p>
+        <div class="checklist-grid">
+          {% for item in trek.things_to_carry %}
+          <label class="carry-checklist-item" id="carry-item-{{ loop.index0 }}">
+            <input type="checkbox" data-idx="{{ loop.index0 }}">
+            <span>{{ item }}</span>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="trek-detail-card" style="border-left:4px solid #ffb703;">
+        <h2 class="trek-card-title" style="border-left:none; padding-left:0;">Trek Rules &amp; Safety Guidelines</h2>
+        <ul style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.8rem;">
+          {% for item in trek.safety_rules %}
+          <li style="margin-bottom:0.6rem; font-size:0.9rem; list-style-type:decimal; margin-left:1.2rem;">{{ item }}</li>
+          {% endfor %}
+        </ul>
+        <div style="background-color:hsl(var(--accent-earth-light), 0.3); border-radius:8px; padding:1rem; margin-top:1.5rem; font-size:0.85rem;">
+          <strong>Weather / Cancellation Note:</strong> In case of extreme weather alerts (heavy rain warnings, landslides, or state directives), treks may be rescheduled or cancelled. Refund will be processed as per policy guidelines.
+        </div>
+      </div>
+
+      <div class="trek-detail-card">
+        <h2 class="trek-card-title">Trek Meeting Point Location</h2>
+        <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <strong style="display:block; font-size:0.95rem;">Reporting Spot: {{ trek.meeting_point }}</strong>
+              <span style="font-size:0.85rem; color:rgba(0,0,0,0.6);">Reporting Time: {{ trek.reporting_time }} | Expected Return: {{ trek.expected_return_time }}</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query={{ trek.meeting_point|urlencode }}" target="_blank" rel="noopener" class="btn btn-outline" style="color:hsl(var(--primary-green)); border-color:hsl(var(--primary-green)); padding:0.4rem 1rem; font-size:0.8rem;">Get Directions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-sidebar-card">
+      <div class="sidebar-price-info"><span>Trek Cost (per person)</span><span class="amount">₹{{ trek.price }}</span></div>
+
+      <div style="margin-bottom:1.5rem;">
+        <label class="form-label" style="font-weight:700;">1. Choose Trek Date</label>
+        <div class="sidebar-dates-list">
+          {% set first_ok = namespace(id=None) %}
+          {% for d in dates %}
+            {% set sold = d.available_seats <= 0 %}
+            {% if not sold and first_ok.id is none %}{% set first_ok.id = d.id %}{% endif %}
+            <div class="sidebar-date-option {{ 'disabled' if sold }} {{ 'selected' if first_ok.id == d.id }}" data-date-id="{{ d.id }}" data-seats="{{ d.available_seats }}">
+              <div class="sidebar-date-text">
+                <span class="sidebar-date-val">{% if d.start_date == d.end_date %}{{ d.start_date|long_date }}{% else %}{{ d.start_date|short_date }} - {{ d.end_date|long_date }}{% endif %}</span>
+                <span class="sidebar-seats-val">{{ d.available_seats }} of {{ d.total_seats }} seats left</span>
+              </div>
+              <div>{{ status_pill(d.status, d.available_seats) }}</div>
+            </div>
+          {% else %}
+            <p style="color:rgba(0,0,0,0.5); font-size:0.85rem; text-align:center; padding:1rem 0;">No upcoming dates currently scheduled. Check back later!</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <label class="form-label" style="font-weight:700;" for="booking-people-qty">2. Select Participants Count</label>
+        <select id="booking-people-qty" class="filter-select" style="max-width:120px; font-weight:600;">
+          {% for n in [1,2,3,4,5,6,8,10] %}<option value="{{ n }}">{{ n }} {{ 'Person' if n == 1 else 'People' }}</option>{% endfor %}
+        </select>
+      </div>
+
+      <button id="sidebar-book-btn" class="btn btn-secondary" data-booking-url="{{ url_for('booking', trek_id=trek.id) }}" style="width:100%; display:flex; justify-content:center; padding:1rem; border-radius:8px;" {{ 'disabled' if not active_date }}>Book Trek Slots</button>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-book-bar-mobile">
+  <div class="sticky-mob-price"><span class="label">Starting Price</span><span class="amt">₹{{ trek.price }} / person</span></div>
+  <button id="sticky-mob-book-btn" class="btn btn-secondary" style="padding:0.6rem 1.5rem; font-size:0.9rem;" {{ 'disabled' if not active_date }}>Book Now</button>
+</div>
+{% endblock %}

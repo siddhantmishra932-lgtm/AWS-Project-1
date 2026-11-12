@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf with context %}
+{% block content %}
+{% if rows is none %}
+<section class="section-wrapper" style="max-width:500px; text-align:center; padding:5rem 2rem;">
+  <h2>User Account Login</h2>
+  <p style="color:rgba(0,0,0,0.6); margin:1rem 0 2rem 0;">Enter your registered email to access your bookings dashboard.</p>
+  <form method="post" action="{{ url_for('login') }}" style="display:flex; flex-direction:column; gap:1rem;">
+    {{ csrf() }}
+    <input type="email" name="email" class="form-input" placeholder="Enter your email ID" required>
+    <button type="submit" class="btn btn-primary" style="justify-content:center;">Access Dashboard</button>
+  </form>
+</section>
+{% else %}
+<section class="section-wrapper">
+  <div class="dashboard-layout">
+    <aside class="dashboard-sidebar">
+      <div style="padding-bottom:1rem; border-bottom:1px solid rgba(0,0,0,0.06); margin-bottom:1rem; text-align:center;">
+        <div class="user-avatar" style="width:60px; height:60px; font-size:1.5rem; margin:0 auto 0.5rem auto;">U</div>
+        <strong style="font-size:0.9rem; display:block; word-break:break-all;">{{ session_user }}</strong>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5);">TAF Trekker Member</span>
+      </div>
+      <div class="dash-menu-item active">My Bookings</div>
+      <form method="post" action="{{ url_for('logout') }}">
+        {{ csrf() }}
+        <button type="submit" class="dash-menu-item" style="background:none; border:none; width:100%; text-align:left; color:#c62828;">Logout</button>
+      </form>
+    </aside>
+
+    <div class="dashboard-content-panel">
+      <h2 style="font-size:1.4rem; margin-bottom:1.5rem; border-bottom:1px solid rgba(0,0,0,0.05); padding-bottom:0.4rem;">Trek Bookings Logs</h2>
+      {% if rows %}
+      <div class="dashboard-table-wrapper">
+        <table class="dashboard-table">
+          <thead><tr><th>Booking ID</th><th>Trek</th><th>Date</th><th>Trekkers</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            {% for r in rows %}
+            <tr>
+              <td><strong>{{ r.b.id }}</strong></td>
+              <td>{{ r.trek.name if r.trek else 'Deleted Trek' }}</td>
+              <td>{{ r.date.start_date|short_date if r.date else '-' }}</td>
+              <td>{{ r.b.num_participants }} Person(s)</td>
+              <td>₹{{ r.b.total_amount }}</td>
+              <td style="color:{{ '#2e7d32' if r.b.booking_status == 'Confirmed' else '#c62828' }}; font-weight:700;">{{ r.b.booking_status }}</td>
+              <td>
+                <div style="display:flex; gap:0.4rem;">
+                  <a href="{{ url_for('confirmation', booking_id=r.b.id) }}" class="btn btn-outline" style="padding:0.3rem 0.6rem; font-size:0.75rem; color:hsl(var(--primary-green)); border-color:hsl(var(--primary-green)); border-radius:4px;">View Pass</a>
+                  {% if r.can_cancel %}
+                  <form method="post" action="{{ url_for('cancel', booking_id=r.b.id) }}" data-confirm="Are you sure you want to cancel booking {{ r.b.id }}? Your paid slot will be returned to availability registry.">
+                    {{ csrf() }}
+                    <button type="submit" class="btn btn-outline" style="padding:0.3rem 0.6rem; font-size:0.75rem; color:#d90429; border-color:#d90429; border-radius:4px;">Cancel</button>
+                  </form>
+                  {% endif %}
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p style="text-align:center; padding:3rem; color:rgba(0,0,0,0.5);">You have not booked any trek bookings yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

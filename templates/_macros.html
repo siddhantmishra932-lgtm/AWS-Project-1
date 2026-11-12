@@ -1,0 +1,59 @@
+{% macro difficulty_badge(difficulty) -%}
+  {% set d = difficulty.lower() %}
+  <span class="difficulty-badge {{ 'difficulty-difficult' if d == 'difficult' else ('difficulty-moderate' if d == 'moderate' else 'difficulty-easy') }}">{{ difficulty }}</span>
+{%- endmacro %}
+
+{% macro status_badge(status, seats) -%}
+  {% if status == 'Almost Full' %}
+    <span class="seat-status-pill status-almost">Almost Full ({{ seats }} Left)</span>
+  {% elif status in ('Full', 'Closed') %}
+    <span class="seat-status-pill status-full">Sold Out</span>
+  {% else %}
+    <span class="seat-status-pill status-available">Seats Available</span>
+  {% endif %}
+{%- endmacro %}
+
+{% macro status_pill(status, seats) -%}
+  {% if status in ('Full', 'Closed') or seats <= 0 %}
+    <span class="seat-status-pill status-full" style="padding:0.1rem 0.4rem; font-size:0.65rem;">Sold Out</span>
+  {% elif status == 'Almost Full' or seats <= 5 %}
+    <span class="seat-status-pill status-almost" style="padding:0.1rem 0.4rem; font-size:0.65rem;">Hurry!</span>
+  {% else %}
+    <span class="seat-status-pill status-available" style="padding:0.1rem 0.4rem; font-size:0.65rem;">Active</span>
+  {% endif %}
+{%- endmacro %}
+
+{% macro trek_card(trek, dates) -%}
+  <div class="trek-card">
+    <div class="card-img-wrapper">
+      <img src="{{ trek.image }}" alt="{{ trek.name }}" loading="lazy" referrerpolicy="no-referrer">
+      {{ difficulty_badge(trek.difficulty) }}
+      <div class="price-tag">₹{{ trek.price }}</div>
+    </div>
+    <div class="card-body">
+      <div class="card-location">{{ trek.location }}</div>
+      <h3 class="card-title">{{ trek.name }}</h3>
+      <div class="card-specs">
+        <div class="spec-item"><span>{{ trek.elevation }} ft</span></div>
+        <div class="spec-item"><span>{{ trek.distance|round|int if trek.distance == trek.distance|round else trek.distance }} km</span></div>
+        <div class="spec-item"><span>{{ trek.duration }}</span></div>
+        <div class="spec-item"><span>Group</span></div>
+      </div>
+      <div class="card-next-date">
+        {% if dates %}
+          <span>Next Date: {{ dates[0].start_date|long_date }}</span>
+        {% else %}
+          <span>No upcoming dates</span>
+        {% endif %}
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto;">
+        {% if dates %}{{ status_badge(dates[0].status, dates[0].available_seats) }}{% else %}<span></span>{% endif %}
+        <a href="{{ url_for('trek_detail', trek_id=trek.id) }}" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">View Details</a>
+      </div>
+    </div>
+  </div>
+{%- endmacro %}
+
+{% macro csrf() -%}
+  <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+{%- endmacro %}

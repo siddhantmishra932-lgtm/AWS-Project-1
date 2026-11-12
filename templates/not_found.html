@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="section-wrapper" style="text-align:center; padding:5rem 2rem;">
+  <h2>{{ title }}</h2>
+  <p style="margin-top:1rem;"><a href="{{ url_for(back) }}" class="btn btn-primary">{{ back_label }}</a></p>
+</div>
+{% endblock %}

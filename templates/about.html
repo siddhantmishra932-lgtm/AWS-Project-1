@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}About TAF - Completed Expeditions{% endblock %}
+{% block content %}
+<section class="hero" style="height:45vh; min-height:300px; position: relative; overflow: hidden; background: none;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/db/Raigad_Fort_Maha_Darwaja.jpg" referrerpolicy="no-referrer" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" alt="Raigad Fort">
+  <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.8)); z-index:2;"></div>
+  <div class="hero-content" style="z-index: 3; position: relative;">
+    <span class="hero-tag" style="background-color:rgba(212,163,115,0.25);">TAF Leadership Experience</span>
+    <h1>Our Completed Expeditions</h1>
+    <p>Our trek captains have personally scaled, mapped, and audited these historical forts in Maharashtra, ensuring the highest standards of route safety and local heritage expertise.</p>
+  </div>
+</section>
+
+<section class="section-wrapper" style="padding-bottom:1.5rem;">
+  <div style="background-color:white; border-radius:12px; box-shadow:var(--card-shadow); padding:2.5rem; display:grid; grid-template-columns: 1.5fr 1fr; gap:2.5rem; align-items:center;" class="form-grid">
+    <div>
+      <h2 style="font-size:1.75rem; margin-bottom:1rem; color:hsl(var(--primary-deep)); border-left:4px solid hsl(var(--primary-green)); padding-left:0.5rem;">Exploring with Authority</h2>
+      <p style="margin-bottom:1rem; font-size:0.95rem; color:rgba(0,0,0,0.85); line-height:1.7;">
+        At <strong>Treks, Adventure and Fun (TAF)</strong>, we believe that true leadership is forged on the trails. Before we open any trek to the public, our technical climbing captains and local guides execute complete audits of the paths. We map emergency routes and secure partnerships with local village homestays.
+      </p>
+      <p style="font-size:0.95rem; color:rgba(0,0,0,0.85); line-height:1.7;">
+        Below is the catalog of the <strong>10 historical summits</strong> that our admin core team completed. These expeditions form the foundation of our expertise, enabling us to deliver premium, safe, and historically rich Sahyadri adventures.
+      </p>
+    </div>
+    <div style="background-color:hsl(var(--primary-deep)); color:white; padding:2rem; border-radius:8px; text-align:center;">
+      <h3 style="color:hsl(var(--accent-earth)); font-size:1.3rem; margin-bottom:1.2rem;">Leader Track Record</h3>
+      <div style="display:flex; justify-content:space-around; margin-bottom:1.5rem;">
+        <div><strong style="font-size:2rem; font-family:var(--font-family-title); display:block; color:white;">10+</strong><span style="font-size:0.75rem; color:rgba(255,255,255,0.7); text-transform:uppercase;">Forts Scaled</span></div>
+        <div><strong style="font-size:2rem; font-family:var(--font-family-title); display:block; color:white;">2,500+</strong><span style="font-size:0.75rem; color:rgba(255,255,255,0.7); text-transform:uppercase;">Trekkers Guided</span></div>
+      </div>
+      <span style="font-size:0.75rem; color:rgba(255,255,255,0.6); display:block; border-top:1px solid rgba(255,255,255,0.1); padding-top:0.8rem;">All leaders are IMF certified and First-Aid Certified responders.</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-wrapper" style="padding-top:1.5rem;">
+  <div class="section-header">
+    <h2>Expeditions Roll of Honor</h2>
+    <p>Historical Sahyadri forts explored, audited, and successfully climbed by our core leadership crew.</p>
+  </div>
+  <div class="trek-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+    {% for name, height, when, image, desc in forts %}
+    <div class="trek-card" style="box-shadow:var(--card-shadow); border: 1px solid rgba(0,0,0,0.04);">
+      <div class="card-img-wrapper" style="height:180px;">
+        <img src="{{ image }}" alt="{{ name }}" loading="lazy" referrerpolicy="no-referrer">
+        <span class="difficulty-badge" style="background-color:hsl(var(--primary-green)); font-size:0.7rem; font-weight:700; text-transform:uppercase; top:0.8rem; right:0.8rem; position:absolute; color:white; padding:0.2rem 0.6rem; border-radius:12px;">COMPLETED</span>
+      </div>
+      <div class="card-body" style="padding:1.2rem;">
+        <div style="font-size:0.75rem; color:hsl(var(--accent-earth)); font-weight:700; text-transform:uppercase; margin-bottom:0.3rem;">{{ height }} Elevation</div>
+        <h3 style="font-size:1.15rem; margin-bottom:0.5rem;">{{ name }}</h3>
+        <p style="font-size:0.82rem; color:rgba(33,37,41,0.75); line-height:1.5; margin-bottom:1rem; flex-grow:1;">{{ desc }}</p>
+        <div style="border-top:1px dashed rgba(0,0,0,0.08); padding-top:0.6rem; display:flex; justify-content:space-between; font-size:0.75rem; color:rgba(33,37,41,0.5); font-weight:600;">
+          <span>Expedition Date:</span><span style="color:hsl(var(--primary-deep));">{{ when }}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

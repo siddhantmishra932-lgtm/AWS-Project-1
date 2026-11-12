@@ -1,0 +1,842 @@
+{
+  "treks": [
+    {
+      "id": "trek-harishchandragad",
+      "name": "Harishchandragad Fort Trek",
+      "location": "Malshej Ghat, Ahmednagar",
+      "district": "Ahmednagar",
+      "difficulty": "Difficult",
+      "elevation": 4670,
+      "distance": 12,
+      "duration": "2 Days / 1 Night",
+      "meetingPoint": "Kalyan Railway Station, Mumbai or Shivajinagar, Pune",
+      "reportingTime": "22:00 (Night Trek)",
+      "expectedReturnTime": "20:00 (Next Day)",
+      "price": 1499,
+      "description": "Harishchandragad is one of the most historic and scenic hill forts in the Western Ghats. Known for its massive semi-circular cliff - the Kokankada (Cobra's Hood), which offers a breathtaking vertical drop of 2,000 feet, and the beautiful Kedareshwar Cave where a huge Shiva Linga stands surrounded by water. This adventure includes trekking, exploration of caves, historical fort ruins, sunset from Kokankada, and overnight camping under a million stars.",
+      "image": "/static/images/harishchandragad.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Departure & Base Village Ascent",
+          "items": [
+            "Meeting at Kalyan Station (10:00 PM) / Pune Shivajinagar (9:30 PM)",
+            "Private vehicle transfer to Pachnai (Base Village)",
+            "Midnight journey through the scenic Malshej Ghat",
+            "Reach base village Pachnai by 4:00 AM; rest for a while"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Trek, Kokankada Sunset & Camping",
+          "items": [
+            "Wake up call at 6:00 AM, freshen up and have a hot local breakfast",
+            "Trek begins from Pachnai through lush forest trails (approx. 2.5 - 3 hours)",
+            "Reach the fort plateau, visit Kedareshwar Cave and Harishchandreshwar Temple",
+            "Check-in at camping site, enjoy a freshly prepared hot Maharashtrian lunch",
+            "Evening walk to the legendary Kokankada for a majestic sunset experience",
+            "Campfire, fun activities, dinner, and overnight stay in tents"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "Taramati Sunrise & Descent",
+          "items": [
+            "Early morning hike to Taramati Peak (highest point of the fort) for sunrise",
+            "Return to tents, have breakfast and tea",
+            "Pack bags and begin descent back to Pachnai village",
+            "Lunch at base village and start return journey in private vehicle",
+            "Reach Kalyan / Pune by 8:00 PM with unforgettable memories"
+          ]
+        }
+      ],
+      "included": [
+        "Private transport (Non-AC) from Mumbai/Pune to base village and back",
+        "Day 1: Evening Tea; Day 2: Breakfast, Lunch, Dinner; Day 3: Breakfast, Lunch",
+        "Accommodation in sharing tents (Tents, sleeping mats, and blankets provided)",
+        "Experienced and certified Trek Leaders",
+        "Local guide and forest entry charges",
+        "First aid support and safety equipment"
+      ],
+      "excluded": [
+        "Personal expenses (mineral water, cold drinks, etc.)",
+        "Any meals during the travel on Day 1 night or Day 3 night",
+        "Personal travel insurance",
+        "Emergency expenses caused by weather, landslides, or road blocks",
+        "Anything not specifically listed under inclusions"
+      ],
+      "thingsToCarry": [
+        "Trekking Shoes with good grip (compulsory)",
+        "Double strap backpack (30-40 Litres) to carry your gear",
+        "At least 2-3 Litres of water (compulsory)",
+        "Torch or headlamp with extra batteries",
+        "Warm clothes (jacket/sweater) as nights get cold on the fort",
+        "Raincoat or poncho (for monsoon treks)",
+        "Change of clothes (2 sets) and extra socks",
+        "Personal medicines and toiletry kit",
+        "Identity proof (Aadhar Card / Driver's License)",
+        "Energy snacks like biscuits, dry fruits, ORS, or Glucon-D",
+        "Power bank for mobile charging"
+      ],
+      "safetyRules": [
+        "Littering is strictly prohibited. Keep mountains clean.",
+        "Consuming alcohol, smoking, or any toxic substance is strictly banned during the trek.",
+        "Trekkers must follow instructions of the Trek Leader at all times.",
+        "The organizer reserve the rights to change/modify the itinerary due to weather or safety conditions.",
+        "Average physical fitness is required. People with asthma or heart conditions should consult a doctor before registering."
+      ]
+    },
+    {
+      "id": "trek-kalsubai",
+      "name": "Kalsubai Peak Monsoon Trek",
+      "location": "Bari, Nashik",
+      "district": "Nashik",
+      "difficulty": "Moderate",
+      "elevation": 5400,
+      "distance": 10,
+      "duration": "1 Day (Night Trek)",
+      "meetingPoint": "Kasara Railway Station, Central Line",
+      "reportingTime": "01:30 AM (Midnight)",
+      "expectedReturnTime": "18:00 (Same Day)",
+      "price": 999,
+      "description": "Scale the highest peak of Maharashtra! Standing tall at 1,646 meters (5,400 feet), Kalsubai Peak offers an unmatched panoramic view of the Sahyadri ranges. The trekking route is well-defined with iron ladders installed in steep rock patches for safety. In monsoon and post-monsoon, the peak is wrapped in thick clouds, surrounded by blooming wild flowers and gushing waterfalls.",
+      "image": "/static/images/kalsubai.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Night Meet & Summit",
+          "items": [
+            "Gather at Kasara Station by 1:30 AM and board local vehicles to Bari village",
+            "Reach Bari base village by 3:00 AM, brief introduction, and instructions",
+            "Begin the night trek by 3:30 AM under the guidance of our lead crew",
+            "Climb up steel ladders and rocky trails through cool breeze and mist",
+            "Reach the summit temple of Kalsubai by 6:30 AM for a glorious cloudy sunrise",
+            "Explore the summit, capture pictures, and begin the descent by 8:00 AM",
+            "Reach Bari village by 11:30 AM, freshen up and indulge in local village lunch",
+            "Depart in sharing vehicles to Kasara Station by 2:30 PM",
+            "Board train to Mumbai with the pride of scaling Maharashtra's highest peak!"
+          ]
+        }
+      ],
+      "included": [
+        "Local transport from Kasara Station to Bari base village and back",
+        "Unlimited hot Maharashtrian breakfast & tea at Bari village",
+        "Traditional vegetarian home-cooked lunch at Bari village",
+        "Trek leaders, local guides, and safety crew fees",
+        "Bhandardara wildlife sanctuary entry charges",
+        "Basic first-aid support"
+      ],
+      "excluded": [
+        "Train tickets/travel up to Kasara Station",
+        "Personal expenses, bottled water, or extra snacks",
+        "Travel insurance",
+        "Anything not mentioned in the inclusions"
+      ],
+      "thingsToCarry": [
+        "Good trekking shoes with rubber grip (no sandals/slippers)",
+        "Backpack to keep hands free",
+        "At least 3 Litres of water",
+        "Raincoat/Poncho and plastic bags to keep electronics dry",
+        "Torch or headlamp with extra batteries (essential for night walk)",
+        "A set of dry clothes to change after the trek",
+        "Personal medicines, Aadhar Card copy",
+        "Chocolates, dry fruits, energy drinks (Glucon-D)"
+      ],
+      "safetyRules": [
+        "No littering. Bring back your own thrash.",
+        "Strictly no alcohol/smoking/narcotics on the trek.",
+        "Always walk in group and follow the trek leaders' trail.",
+        "Be extremely careful on the steel ladders, maintain distance."
+      ]
+    },
+    {
+      "id": "trek-rajmachi",
+      "name": "Rajmachi Fort & Camping",
+      "location": "Udhewadi, Lonavala",
+      "district": "Pune",
+      "difficulty": "Easy-Moderate",
+      "elevation": 2710,
+      "distance": 16,
+      "duration": "2 Days / 1 Night",
+      "meetingPoint": "Lonavala Railway Station",
+      "reportingTime": "15:00 (Saturday)",
+      "expectedReturnTime": "14:00 (Sunday)",
+      "price": 1299,
+      "description": "Rajmachi is a historical fort located in the rugged Sahyadri mountains. It consists of two twin fortresses: Shrivardhan and Manaranjan. The trek is extremely popular for its scenic trails, historic structures, ancient water tanks, Buddhist caves, and during pre-monsoon, the magical fireflies show! This trek includes camping in the base village Udhewadi and exploring both forts at sunrise.",
+      "image": "/static/images/rajmachi.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Lonavala Rendezvous & Firefly Trail",
+          "items": [
+            "Assemble at Lonavala Station (3:00 PM) and board 4x4 vehicles to Udhewadi",
+            "Scenic off-road drive (1.5 hours) through the dense forest",
+            "Reach base village Udhewadi, check-in, set up tents and enjoy evening tea",
+            "Post-sunset, go for a short forest trail to spot magical fireflies (seasonal)",
+            "Enjoy a piping hot local dinner followed by stargazing and stories"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Double Fort Ascent & Return",
+          "items": [
+            "Wake up early by 5:30 AM, enjoy hot tea",
+            "Ascent Shrivardhan Fort (approx. 45 mins) to witness the sunrise and surrounding valleys",
+            "Explore historical bastions, water reservoirs, and structures on the fort",
+            "Brief trek to Manaranjan Fort if time permits, then descend to base village",
+            "Delicious Maharashtrian breakfast at Udhewadi, pack bags",
+            "Board 4x4 vehicles back to Lonavala Station",
+            "Reach Lonavala by 1:30 PM and head back to Mumbai/Pune"
+          ]
+        }
+      ],
+      "included": [
+        "4x4 transport from Lonavala Station to Udhewadi and back",
+        "Saturday: Evening Tea & Biscuits, Village Dinner (Veg/Non-Veg)",
+        "Sunday: Morning Tea, Local Breakfast",
+        "Tents stay with mats and clean bedding on sharing basis",
+        "First-aid support, expert leaders & guides",
+        "Rajmachi forest entry fees"
+      ],
+      "excluded": [
+        "Travel till Lonavala railway station",
+        "Sunday lunch (you can have it in Lonavala city)",
+        "Mineral water, personal expenditures",
+        "Any additional transport or medical emergency expenses"
+      ],
+      "thingsToCarry": [
+        "Comfortable shoes, backpack",
+        "Water bottle (2 Litres minimum)",
+        "Torch or headlamp (must-have for night/firefly walk)",
+        "Odomos or insect repellent cream",
+        "Toiletries, personal medication, ID proof",
+        "Light warm clothing (nights can be breezy)",
+        "Power bank, camera (optional)"
+      ],
+      "safetyRules": [
+        "Respect the forest and wildlife. Do not shout or play loud music.",
+        "Smoking and drinking alcohol are strictly banned.",
+        "Keep the tents zipped up to avoid bugs/insects entering.",
+        "Trek leaders' instructions are final."
+      ]
+    },
+    {
+      "id": "trek-devkund",
+      "name": "Devkund Waterfall Trek",
+      "location": "Bhira, Raigad",
+      "district": "Raigad",
+      "difficulty": "Easy",
+      "elevation": 2000,
+      "distance": 9,
+      "duration": "1 Day",
+      "meetingPoint": "Pritam Hotel, Dadar (Mumbai) or Swargate (Pune)",
+      "reportingTime": "05:00 AM",
+      "expectedReturnTime": "21:00 (Same Day)",
+      "price": 1199,
+      "description": "Devkund Waterfall is a hidden gem located in the dense forests near Bhira Dam. It is the confluence of three rivers and is believed to be the origin of the Kundalika River. The trek passes through lush forests, river streams, and wooden bridges, culminating at the spectacular Devkund pool where water plunges from a height of over 150 feet. It is a perfect beginner-friendly adventure trail.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Devkund_waterfall.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Forest Trail & Devkund Pool",
+          "items": [
+            "Pick up from Dadar (5:00 AM) / Swargate (5:30 AM) in private bus",
+            "Enjoy breakfast on the way to Bhira village",
+            "Reach Bhira base by 9:00 AM, brief check, register, and start the trek",
+            "Trek through a dense forest canopy, crossing small streams (approx. 2 hours)",
+            "Reach the breathtaking Devkund Waterfall; marvel at the plunge pool",
+            "Relax, capture memories (swimming is prohibited in deep zone for safety)",
+            "Trek back to Bhira base village by 2:30 PM",
+            "Freshen up and enjoy a hearty hot local lunch",
+            "Board the private bus and start return journey by 4:30 PM",
+            "Arrive in Mumbai / Pune by 9:00 PM"
+          ]
+        }
+      ],
+      "included": [
+        "Bus transport from Dadar/Swargate to Bhira and back",
+        "Breakfast & Tea on the way, Buffet Lunch (Veg) at base village",
+        "Forest entry fees, local guide charges, and expert crew guidance",
+        "First-aid support and life jackets on standby (if needed)"
+      ],
+      "excluded": [
+        "Personal food purchases, mineral water",
+        "Personal insurance",
+        "Any medical emergency costs"
+      ],
+      "thingsToCarry": [
+        "Trekking shoes or sports shoes (compulsory)",
+        "Extra pair of dry clothes & towel (you will get wet)",
+        "Water bottle (2-3 Litres)",
+        "Dry bags/plastic wraps for phones and cameras",
+        "Personal medicines, ID proof",
+        "Energy bars, snacks, glucose powder"
+      ],
+      "safetyRules": [
+        "Entering the deep danger zone of Devkund pool is strictly banned. Follow safety ropes.",
+        "No littering in the reserve forest area.",
+        "Alcohol and smoking are strictly forbidden.",
+        "Walk on the marked trail, do not wander off alone in the forest."
+      ]
+    },
+    {
+      "id": "trek-sandhan",
+      "name": "Sandhan Valley Canyon Trek",
+      "location": "Samrad, Ahmednagar",
+      "district": "Ahmednagar",
+      "difficulty": "Difficult",
+      "elevation": 3000,
+      "distance": 14,
+      "duration": "2 Days / 2 Nights",
+      "meetingPoint": "Kasara Railway Station",
+      "reportingTime": "22:30 (Friday Night)",
+      "expectedReturnTime": "19:00 (Sunday)",
+      "price": 2199,
+      "description": "Sandhan Valley is known as the 'Valley of Shadow' or the 'Grand Canyon of Maharashtra'. It is a unique water-carved valley about 200 feet deep and 1.5 miles long. The trek involves walking through narrow ravines where sunlight rarely reaches, wading through cold pools of chest-deep water, and rappelling down steep rock faces using ropes. This is a thrilling adventure that ends with camping near the blue waters of Bhandardara lake.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Sandhan_valley.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Night Travel & Base Village Arrival",
+          "items": [
+            "Assemble at Kasara Station (10:30 PM Friday) and travel to Samrad in local jeeps",
+            "Reach Samrad by 2:00 AM, rest in a local homestay"
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Canyon Descent & Rappelling",
+          "items": [
+            "Wake up at 5:30 AM, have hot breakfast and tea",
+            "Start the trek into the narrow canyon by 6:30 AM",
+            "Wade through cold pools of water, navigate massive boulders",
+            "Experience thrill at 3 technical rappelling patches (up to 45 ft drop)",
+            "Reach base camping site by 4:30 PM, pitch tents, and relax",
+            "Enjoy bonfire, delicious dinner, and sleep in the wilderness"
+          ]
+        },
+        {
+          "day": 3,
+          "title": "湖畔 Sunrise & Return Journey",
+          "items": [
+            "Wake up to a crisp morning, enjoy hot breakfast near the stream",
+            "Short trek to Dehne village (approx. 2.5 hours)",
+            "Have lunch at Dehne homestay, pack up",
+            "Travel from Dehne to Asangaon Station in local transport",
+            "Board local train to Mumbai, reach by 7:00 PM Sunday"
+          ]
+        }
+      ],
+      "included": [
+        "Transport Kasara to Samrad, and Dehne to Asangaon",
+        "Saturday: Homestay rest, Breakfast, Lunch (Packed), Dinner at campsite",
+        "Sunday: Breakfast, Lunch at Dehne village",
+        "Adventure gear (harness, helmets, ropes, carabiners)",
+        "Certified technical team and safety coordinators",
+        "Tents with mats & sheets on sharing basis"
+      ],
+      "excluded": [
+        "Train travel up to Kasara/from Asangaon",
+        "Personal expenses, mineral water",
+        "Expenses due to early exit from trek or medical evacuations"
+      ],
+      "thingsToCarry": [
+        "Trekking shoes with rubber soles (compulsory, shoes might get wet/soiled)",
+        "Backpack (wrap clothes in plastic inside to keep them dry)",
+        "At least 3 Litres of water (compulsory)",
+        "Torch or headlamp with extra batteries (compulsory)",
+        "Full length track pants and full sleeve shirts (avoid shorts due to thorns/boulders)",
+        "Warm jacket (canyon nights are very cold)",
+        "Personal medication, toiletries, ORS/Glucose",
+        "Aadhar Card / Gov ID"
+      ],
+      "safetyRules": [
+        "This is an extreme trek. Average physical fitness and mental grit are required.",
+        "Strictly obey the instructions of the technical rappelling leaders.",
+        "Consuming alcohol/smoking is completely prohibited.",
+        "Keep hands free; do not carry cameras or phones loose during rock crawls."
+      ]
+    },
+    {
+      "id": "trek-prabalgad",
+      "name": "Prabalgad Fort Trek",
+      "difficulty": "Moderate",
+      "elevation": 2300,
+      "distance": 8,
+      "duration": "1 Day",
+      "location": "Panvel, Raigad district",
+      "district": "Raigad",
+      "reportingTime": "06:30",
+      "meetingPoint": "Panvel Railway Station, near ticket counter",
+      "expectedReturnTime": "18:30 (Same Day)",
+      "price": 1099,
+      "description": "Prabalgad Fort is situated adjacent to Kalavantin Durg. It is covered with dense forests and features a flat plateau summit. Prabalmachi, the base village, offers a stunning view of both the Kalavantin Durg pinnacle and Prabalgad cliff. This trek involves crossing beautiful streams and hiking through lush green tree canopies.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/de/Prabalgad_Fort_Pinnacle.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Ascent & Plateau Exploration",
+          "timeSlots": [
+            {
+              "time": "06:30",
+              "description": "Assemble at Panvel station, proceed to Thakurwadi village by shared vehicles."
+            },
+            {
+              "time": "07:30",
+              "description": "Reach Thakurwadi base, begin trekking towards Prabalmachi."
+            },
+            {
+              "time": "09:00",
+              "description": "Breakfast at Prabalmachi, proceed with the climb to Prabalgad plateau."
+            },
+            {
+              "time": "11:30",
+              "description": "Reach Prabalgad summit, explore ruins, watch towers, and the stone pond."
+            },
+            {
+              "time": "13:30",
+              "description": "Descend to Prabalmachi village and have hot local Maharashtrian lunch."
+            },
+            {
+              "time": "15:00",
+              "description": "Begin final descent to Thakurwadi village."
+            },
+            {
+              "time": "17:00",
+              "description": "Shared vehicles back to Panvel station, bid goodbye!"
+            }
+          ]
+        }
+      ],
+      "included": [
+        "Transport from Panvel to base village & return",
+        "Local veg breakfast & hot lunch at Prabalmachi",
+        "TAF certified trek leaders & guides fees",
+        "First-Aid & emergency assistance"
+      ],
+      "excluded": [
+        "Mineral water, cold drinks",
+        "Personal expenses of any nature",
+        "Anything not mentioned in inclusions"
+      ],
+      "thingsToCarry": [
+        "Trekking shoes with solid grip (compulsory)",
+        "Minimum 2-3 Litres of water (compulsory)",
+        "Double strap backpack to keep hands free",
+        "Rainwear or poncho (monsoon treks)",
+        "Aadhar Card copy"
+      ],
+      "safetyRules": [
+        "Strictly obey the instructions of the trek captains.",
+        "Refrain from taking selfies near high cliffs.",
+        "Alcohol and smoking are completely banned."
+      ]
+    },
+    {
+      "id": "trek-harihar",
+      "name": "Harihar Fort Peak",
+      "difficulty": "Difficult",
+      "elevation": 3676,
+      "distance": 6,
+      "duration": "1 Day",
+      "location": "Trimbakeshwar Range, Nashik",
+      "district": "Nashik",
+      "reportingTime": "01:30",
+      "meetingPoint": "Dadar East Railway Station, near Swaminarayan Temple",
+      "expectedReturnTime": "20:30 (Same Day)",
+      "price": 1199,
+      "description": "Famous for its iconic 80-degree vertical rock-cut stairs. This trek is a thrilling climb carved out on a triangular prism-shaped hill. It offers panoramic views of Vaitarna lake, Bhaskargad, and the surrounding Trimbak range.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Harihar_fort.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Steep Rock Steps Ascent",
+          "timeSlots": [
+            {
+              "time": "01:30",
+              "description": "Depart from Mumbai (Dadar) in a private bus towards Nirgudpada village."
+            },
+            {
+              "time": "05:30",
+              "description": "Reach Nirgudpada, freshen up and have hot Maharashtrian breakfast."
+            },
+            {
+              "time": "06:30",
+              "description": "Briefing session and start the hike towards Harihar Fort plateau."
+            },
+            {
+              "time": "08:30",
+              "description": "Reach the base of the iconic rock-cut vertical stairs and begin climbing with safety ropes."
+            },
+            {
+              "time": "10:00",
+              "description": "Explore the summit, temples, water ponds, and catch views of the Trimbak range."
+            },
+            {
+              "time": "11:30",
+              "description": "Carefully start descending the steep rock steps."
+            },
+            {
+              "time": "14:00",
+              "description": "Reach Nirgudpada base, feast on a traditional Maharashtrian lunch."
+            },
+            {
+              "time": "15:30",
+              "description": "Depart for Mumbai in our private bus."
+            },
+            {
+              "time": "20:30",
+              "description": "Back in Dadar, Mumbai, carrying thrilling memories."
+            }
+          ]
+        }
+      ],
+      "included": [
+        "Private bus transport from Dadar/Thane to Nashik & return",
+        "Traditional local breakfast & hot veg lunch at base village",
+        "Technical safety climbing ropes and harnesses setup",
+        "Certified TAF mountaineering captains fees"
+      ],
+      "excluded": [
+        "Packaged drinking water, snacks",
+        "Emergency evacuation charges",
+        "Personal expenses"
+      ],
+      "thingsToCarry": [
+        "Quality trekking shoes with rubber grip (no sandals)",
+        "Minimum 3 Litres of water (compulsory)",
+        "Electral or ORS powder",
+        "Full length track pants and full sleeve shirts",
+        "Cap / Sunscreen / Sunglasses"
+      ],
+      "safetyRules": [
+        "Obey technical climb marshals at the steep steps patch.",
+        "Do not rush or crowd the rock stairs; maintain distance.",
+        "Consuming liquor or smoking during the trek will result in immediate disqualification."
+      ]
+    },
+    {
+      "id": "trek-pratapgad",
+      "name": "Pratapgad Heritage Trek",
+      "difficulty": "Easy",
+      "elevation": 3543,
+      "distance": 4,
+      "duration": "1 Day",
+      "location": "Mahabaleshwar forest, Satara",
+      "district": "Satara",
+      "reportingTime": "05:30",
+      "meetingPoint": "Dadar East Railway Station, Mumbai",
+      "expectedReturnTime": "21:30 (Same Day)",
+      "price": 1399,
+      "description": "Pratapgad Fort is a major historical fort built by Chatrapati Shivaji Maharaj. Site of the historic battle of Pratapgad between Chatrapati Shivaji Maharaj and Afzal Khan. Features double-walled fortifications, temples, and a massive bronze statue of Chatrapati Shivaji Maharaj.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Pratapgad_Fort_view.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Heritage Tour & Fort Walk",
+          "timeSlots": [
+            {
+              "time": "05:30",
+              "description": "Depart from Dadar/Thane via private AC bus towards Mahabaleshwar."
+            },
+            {
+              "time": "09:30",
+              "description": "Reach the base valley of Pratapgad, have breakfast."
+            },
+            {
+              "time": "10:30",
+              "description": "Begin the easy guided walk to the fort gates (Maha Darwaza)."
+            },
+            {
+              "time": "12:00",
+              "description": "Explore Afzal tower, Bhavani Temple, and catch spectacular views of Jawali valley."
+            },
+            {
+              "time": "14:00",
+              "description": "Enjoy fresh local Mahabaleshwar strawberries and hot lunch."
+            },
+            {
+              "time": "16:00",
+              "description": "Depart for Mumbai in our private bus."
+            },
+            {
+              "time": "21:30",
+              "description": "Reach Dadar, Mumbai, concluding our historic journey."
+            }
+          ]
+        }
+      ],
+      "included": [
+        "AC private bus travel from Mumbai & return",
+        "Guided heritage historical tour fees",
+        "Tasty local breakfast and full lunch",
+        "TAF certified trek coordinators"
+      ],
+      "excluded": [
+        "Horse riding charges, shopping expenses",
+        "Packaged water or beverages"
+      ],
+      "thingsToCarry": [
+        "Comfortable walking or sport shoes",
+        "At least 2 Litres of water",
+        "Raincoat/Umbrella",
+        "Personal medicines"
+      ],
+      "safetyRules": [
+        "Maintain decorum as this is a heritage historical monument.",
+        "Refrain from climbing on high historical fort walls.",
+        "No smoking or drinking allowed."
+      ]
+    },
+    {
+      "id": "trek-sindhudurg",
+      "name": "Sindhudurg Fort Sea Expedition",
+      "difficulty": "Easy",
+      "elevation": 5,
+      "distance": 2,
+      "duration": "2 Days",
+      "location": "Kurte Island, Malvan",
+      "district": "Sindhudurg",
+      "reportingTime": "22:00",
+      "meetingPoint": "Dadar East Railway Station, Mumbai",
+      "expectedReturnTime": "06:00 (Monday morning)",
+      "price": 2999,
+      "description": "A spectacular sea fort built by Chatrapati Shivaji Maharaj on Kurte Island off the Malvan coast. It features massive stone walls designed to withstand ocean currents, historical temples, and three sweet water wells. Includes beach camping and local Konkani seafood.",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/c/c2/Sindhudurg_Fort.jpg",
+      "itinerary": [
+        {
+          "day": 1,
+          "title": "Boat ride to Sea Fort & Beach Camping",
+          "timeSlots": [
+            {
+              "time": "22:00",
+              "description": "Depart from Mumbai on Friday night in an overnight AC sleeper bus."
+            },
+            {
+              "time": "08:30",
+              "description": "Reach Malvan on Saturday morning, check into beachside camp, have breakfast."
+            },
+            {
+              "time": "10:30",
+              "description": "Boat ride to Sindhudurg Fort, guided historical exploration."
+            },
+            {
+              "time": "13:30",
+              "description": "Return to shore, enjoy traditional Malvani lunch (Seafood / Veg)."
+            },
+            {
+              "time": "16:00",
+              "description": "Water sports at the beach, sunset view, campfire and music at night."
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "title": "Scuba Experience & Return Journey",
+          "timeSlots": [
+            {
+              "time": "07:30",
+              "description": "Breakfast, gear up for scuba diving session at the coral reef patch."
+            },
+            {
+              "time": "12:30",
+              "description": "Lunch at Malvan town, buy local mango products."
+            },
+            {
+              "time": "16:30",
+              "description": "Board the return AC sleeper bus to Mumbai."
+            },
+            {
+              "time": "06:00",
+              "description": "Reach Dadar, Mumbai, on Monday morning."
+            }
+          ]
+        }
+      ],
+      "included": [
+        "Sleeper AC bus ticket from Mumbai to Malvan & return",
+        "Beachside camping tents twin sharing with clean washrooms",
+        "Sindhudurg Fort entry tickets and ferry rides",
+        "All meals (Saturday Breakfast to Sunday Lunch) with traditional Malvani flavor",
+        "Trained scuba instructor and basic water sports package"
+      ],
+      "excluded": [
+        "Personal expenses, shopping",
+        "Extra scuba video charges"
+      ],
+      "thingsToCarry": [
+        "Extra pair of clothes for beach activities",
+        "Swimwear or quick dry clothes",
+        "Sunscreen, slippers, cap",
+        "Personal medicines"
+      ],
+      "safetyRules": [
+        "Follow the instructions of the water sport crew during scuba sessions.",
+        "Do not venture deep into the sea without safety life jackets.",
+        "Refrain from consuming alcohol during beach activities."
+      ]
+    }
+  ],
+  "dates": [
+    {
+      "id": "date-h-1",
+      "trekId": "trek-harishchandragad",
+      "startDate": "2026-09-05",
+      "endDate": "2026-09-06",
+      "reportingTime": "22:00",
+      "totalSeats": 30,
+      "availableSeats": 18,
+      "status": "Available"
+    },
+    {
+      "id": "date-h-2",
+      "trekId": "trek-harishchandragad",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-20",
+      "reportingTime": "22:00",
+      "totalSeats": 30,
+      "availableSeats": 3,
+      "status": "Almost Full"
+    },
+    {
+      "id": "date-h-3",
+      "trekId": "trek-harishchandragad",
+      "startDate": "2026-10-03",
+      "endDate": "2026-10-04",
+      "reportingTime": "22:00",
+      "totalSeats": 30,
+      "availableSeats": 0,
+      "status": "Full"
+    },
+    {
+      "id": "date-k-1",
+      "trekId": "trek-kalsubai",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-12",
+      "reportingTime": "01:30",
+      "totalSeats": 40,
+      "availableSeats": 35,
+      "status": "Available"
+    },
+    {
+      "id": "date-k-2",
+      "trekId": "trek-kalsubai",
+      "startDate": "2026-09-26",
+      "endDate": "2026-09-26",
+      "reportingTime": "01:30",
+      "totalSeats": 40,
+      "availableSeats": 1,
+      "status": "Almost Full"
+    },
+    {
+      "id": "date-r-1",
+      "trekId": "trek-rajmachi",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-13",
+      "reportingTime": "15:00",
+      "totalSeats": 25,
+      "availableSeats": 20,
+      "status": "Available"
+    },
+    {
+      "id": "date-r-2",
+      "trekId": "trek-rajmachi",
+      "startDate": "2026-10-10",
+      "endDate": "2026-10-11",
+      "reportingTime": "15:00",
+      "totalSeats": 25,
+      "availableSeats": 25,
+      "status": "Available"
+    },
+    {
+      "id": "date-d-1",
+      "trekId": "trek-devkund",
+      "startDate": "2026-09-06",
+      "endDate": "2026-09-06",
+      "reportingTime": "05:00",
+      "totalSeats": 35,
+      "availableSeats": 12,
+      "status": "Available"
+    },
+    {
+      "id": "date-d-2",
+      "trekId": "trek-devkund",
+      "startDate": "2026-09-20",
+      "endDate": "2026-09-20",
+      "reportingTime": "05:00",
+      "totalSeats": 35,
+      "availableSeats": 0,
+      "status": "Full"
+    },
+    {
+      "id": "date-s-1",
+      "trekId": "trek-sandhan",
+      "startDate": "2026-09-11",
+      "endDate": "2026-09-13",
+      "reportingTime": "22:30",
+      "totalSeats": 20,
+      "availableSeats": 15,
+      "status": "Available"
+    },
+    {
+      "id": "date-prab-1",
+      "trekId": "trek-prabalgad",
+      "startDate": "2026-09-05",
+      "endDate": "2026-09-05",
+      "reportingTime": "06:30",
+      "totalSeats": 30,
+      "availableSeats": 25,
+      "status": "Available"
+    },
+    {
+      "id": "date-prab-2",
+      "trekId": "trek-prabalgad",
+      "startDate": "2026-09-19",
+      "endDate": "2026-09-19",
+      "reportingTime": "06:30",
+      "totalSeats": 30,
+      "availableSeats": 30,
+      "status": "Available"
+    },
+    {
+      "id": "date-hari-1",
+      "trekId": "trek-harihar",
+      "startDate": "2026-09-06",
+      "endDate": "2026-09-06",
+      "reportingTime": "01:30",
+      "totalSeats": 25,
+      "availableSeats": 12,
+      "status": "Available"
+    },
+    {
+      "id": "date-hari-2",
+      "trekId": "trek-harihar",
+      "startDate": "2026-09-20",
+      "endDate": "2026-09-20",
+      "reportingTime": "01:30",
+      "totalSeats": 25,
+      "availableSeats": 1,
+      "status": "Almost Full"
+    },
+    {
+      "id": "date-pratap-1",
+      "trekId": "trek-pratapgad",
+      "startDate": "2026-09-12",
+      "endDate": "2026-09-12",
+      "reportingTime": "05:30",
+      "totalSeats": 35,
+      "availableSeats": 32,
+      "status": "Available"
+    },
+    {
+      "id": "date-sind-1",
+      "trekId": "trek-sindhudurg",
+      "startDate": "2026-09-11",
+      "endDate": "2026-09-13",
+      "reportingTime": "22:00",
+      "totalSeats": 20,
+      "availableSeats": 14,
+      "status": "Available"
+    }
+  ]
+}

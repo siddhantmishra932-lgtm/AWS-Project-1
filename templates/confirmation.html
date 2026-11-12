@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Booking {{ b.id }} - TAF{% endblock %}
+{% block content %}
+<section class="section-wrapper" style="max-width:700px;">
+  <div style="text-align:center; margin-bottom:2rem;" class="no-print">
+    <h2 style="color:{{ '#2e7d32' if b.booking_status == 'Confirmed' else '#c62828' }};">
+      {{ 'Trek Booking Confirmed!' if b.booking_status == 'Confirmed' else 'Booking ' ~ b.booking_status }}
+    </h2>
+    <p style="color:rgba(0,0,0,0.6); margin-top:0.5rem;">Your booking is registered in our portal. Travel pass voucher detailed below.</p>
+  </div>
+
+  <div class="confirmation-voucher" style="background-color:white; border-radius:12px; border:1px dashed rgba(45,106,79,0.3); padding:2.5rem; box-shadow:var(--card-shadow); margin-bottom:2rem; position:relative;">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid rgba(0,0,0,0.06); padding-bottom:1rem; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+      <div>
+        <h3 style="font-size:1.3rem; color:hsl(var(--primary-deep)); font-weight:800; text-transform:uppercase; letter-spacing:-0.5px;">Treks, Adventure &amp; Fun</h3>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5);">Official Booking Receipt Pass</span>
+      </div>
+      <div style="text-align:right;">
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block;">Booking ID</span>
+        <strong style="font-family:var(--font-family-title); font-size:1.15rem; color:hsl(var(--primary-green));">{{ b.id }}</strong>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.5rem;" class="form-grid">
+      <div>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block;">Trek Destination</span>
+        <strong style="font-size:1.1rem; color:hsl(var(--primary-deep));">{{ trek.name if trek else 'Deleted Trek' }}</strong>
+        <span style="font-size:0.8rem; color:rgba(0,0,0,0.6); display:block;">{{ trek.location if trek }}</span>
+      </div>
+      <div>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block;">Trek Date</span>
+        <strong style="font-size:0.95rem;">
+          {% if date %}{% if date.start_date == date.end_date %}{{ date.start_date|full_date }}{% else %}{{ date.start_date|full_date }} to {{ date.end_date|full_date }}{% endif %}{% else %}-{% endif %}
+        </strong>
+      </div>
+      <div>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block;">Meeting Point &amp; Time</span>
+        <strong style="font-size:0.9rem;">{{ trek.meeting_point if trek }}</strong>
+        <span style="font-size:0.8rem; color:rgba(0,0,0,0.6); display:block;">Reporting at: <strong>{{ trek.reporting_time if trek }}</strong></span>
+      </div>
+      <div>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block;">Amount {{ 'Paid' if b.payment_status == 'Paid' else b.payment_status }}</span>
+        <strong style="font-size:1.2rem; color:#2e7d32; font-family:var(--font-family-title);">₹{{ b.total_amount }}</strong>
+        <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block;">Status: {{ 'SECURE PAID' if b.payment_status == 'Paid' else b.payment_status|upper }}</span>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid rgba(0,0,0,0.06); padding-top:1.2rem; margin-bottom:1.5rem;">
+      <span style="font-size:0.75rem; color:rgba(0,0,0,0.5); display:block; margin-bottom:0.5rem;">Registered Trekkers ({{ b.num_participants }})</span>
+      <ul style="display:flex; flex-direction:column; gap:0.4rem;">
+        {% for p in attendees %}
+        <li style="font-size:0.85rem; padding:0.4rem; background:#f8f9fa; border-radius:4px; display:flex; justify-content:space-between;">
+          <span><strong>{{ loop.index }}. {{ p.name }}</strong> ({{ p.gender }}, Age {{ p.age }})</span>
+          <span style="font-size:0.75rem; color:rgba(0,0,0,0.6);">ID Ref: {{ p.id_type }} ({{ p.id_number|mask_id }})</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div style="border-top:1px solid rgba(0,0,0,0.06); padding-top:1rem; font-size:0.8rem; color:rgba(0,0,0,0.6); display:grid; grid-template-columns:1fr 1fr; gap:1rem;" class="form-grid">
+      <div><strong>Support Contacts:</strong><span style="display:block;">Call / WA: +91 8104799308</span><span style="display:block;">Email: yash2518mane@gmail.com</span></div>
+      <div><strong>Emergency Helpline:</strong><span style="display:block; color:#c62828;">+91 7083019308 (24/7 Response)</span></div>
+    </div>
+  </div>
+
+  <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;" class="no-print">
+    <button onclick="window.print()" class="btn btn-dark">Print Ticket</button>
+    <a href="{{ url_for('download_ticket', booking_id=b.id) }}" class="btn btn-outline" style="color:hsl(var(--primary-green)); border-color:hsl(var(--primary-green));">Download Receipt</a>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+  </div>
+</section>
+{% endblock %}

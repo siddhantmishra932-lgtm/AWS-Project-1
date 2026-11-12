@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf with context %}
+{% block content %}
+<section class="section-wrapper">
+  <div class="section-header">
+    <h2>Contact Adventurers Crew</h2>
+    <p>Have questions regarding difficulty, gears, or safety plans? Connect with our professional trek guides.</p>
+  </div>
+  <div class="contact-layout">
+    <div class="contact-info-panel">
+      <div class="contact-info-block"><div class="contact-info-text"><h3>Office Call Lines</h3><p>+91 8104799308 (Mon-Sat 09:00 to 19:00)</p><p>+91 8104799308 (WhatsApp Support)</p></div></div>
+      <div class="contact-info-block"><div class="contact-info-text"><h3>Email Addresses</h3><p>yash2518mane@gmail.com (Registrations &amp; Inquiries)</p><p>yash2518mane@gmail.com (Refunds &amp; Cancellations)</p></div></div>
+      <div class="contact-info-block"><div class="contact-info-text"><h3>Base Office Address</h3><p>Wagle Estate, Thane - 400604, Maharashtra</p></div></div>
+      <div class="contact-info-block" style="border-left: 4px solid #c62828;"><div class="contact-info-text"><h3 style="color:#c62828;">Emergency Helpline</h3><p>+91 7083019308 (24/7 Active Field Coordinator)</p></div></div>
+    </div>
+    <div style="background-color:white; padding:2rem; border-radius:12px; box-shadow:var(--card-shadow);">
+      <h3 style="font-size:1.25rem; margin-bottom:1.5rem; color:hsl(var(--primary-deep)); border-left:4px solid hsl(var(--primary-green)); padding-left:0.5rem;">Send Message Inquiry</h3>
+      <form method="post" action="{{ url_for('contact') }}" style="display:flex; flex-direction:column; gap:1.2rem;">
+        {{ csrf() }}
+        <div><label class="form-label">Full Name</label><input type="text" name="name" class="form-input" required placeholder="Your name"></div>
+        <div><label class="form-label">Email ID</label><input type="email" name="email" class="form-input" required placeholder="Your email address"></div>
+        <div><label class="form-label">Trek Inquiry Context</label>
+          <select name="topic" class="form-input"><option>General Trek Query</option><option>Corporate Group Booking</option><option>Seat Availability Alert</option><option>Cancellation / Rescheduling</option></select></div>
+        <div><label class="form-label">Inquiry Message</label><textarea name="message" class="form-input" rows="4" required placeholder="Type your message details..."></textarea></div>
+        <button type="submit" class="btn btn-secondary" style="justify-content:center;">Send Inquiry Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
